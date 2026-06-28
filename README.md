@@ -8,7 +8,7 @@ Plataforma digital que conecta pessoas em situação de vulnerabilidade social a
 
 ## O problema
 
-No Distrito Federal, o governo qualifica e as ONGs acolhem. Mas nenhuma dessas iniciativas resolve o que acontece depois: a pessoa está pronta para trabalhar e não consegue entrar no mercado porque não tem rede de contatos, histórico verificável ou um canal confiável para ser contratada.
+No Distrito Federal, programas públicos qualificam e instituições sociais acolhem. Mas nenhuma dessas iniciativas resolve o que acontece depois: a pessoa está pronta para trabalhar e não consegue entrar no mercado porque não tem rede de contatos, histórico verificável ou um canal confiável para ser contratada.
 
 Do outro lado, quem precisa de um eletricista, diarista ou pintor depende de indicação de conhecido, sem nenhuma garantia real de qualidade ou segurança.
 
@@ -37,7 +37,7 @@ O Eleva nasceu para fechar essa lacuna: transformar qualificação institucional
 | Banco de dados | SQLite | PythonAnywhere |
 | Integração | REST API + CORS | |
 
-Frontend estático no Vercel para carregamento rápido via CDN. Backend Python no PythonAnywhere para processar as regras críticas de negócio: escrow, tokens de confirmação e repasse financeiro, fora do alcance do cliente.
+Frontend estático no Vercel para carregamento rápido via CDN. Backend Python no PythonAnywhere para processar as regras críticas de negócio: escrow, tokens de confirmação e repasse financeiro, executadas exclusivamente no servidor.
 
 ---
 
@@ -52,6 +52,14 @@ Frontend estático no Vercel para carregamento rápido via CDN. Backend Python n
 ```
 
 ---
+
+## Documentação
+
+O desenvolvimento do ELEVA envolveu pesquisa aplicada, modelagem estratégica e documentação técnica.
+
+- 📊 [Benchmark e Análise Estratégica](docs/Benchmark_Estrategico_ELEVA.pdf)
+- ⚙️ [Documentação Técnica](docs/Documentacao_Tecnica_ELEVA.pdf)
+- 👥 [Personas e Pesquisa de Usuários](docs/Personas_ELEVA.pdf)
 
 ## Como rodar localmente
 
@@ -72,11 +80,11 @@ Abra qualquer `.html` no navegador ou use Live Server (VS Code).
 
 ## Sobre o projeto
 
-Idealizado e desenvolvido por **Carla Barroso**, estudante de Análise e Desenvolvimento de Sistemas na UCB, Residência Tecnológica Porto Digital, 2026.
+A ideia nasceu de vivências reais no Distrito Federal. Morando no Areal, região próxima a um albergue, e trabalhando no centro de Taguatinga, observei de perto a realidade de pessoas em situação de vulnerabilidade social e as dificuldades de reinserção no mercado de trabalho, mesmo após processos de acolhimento e qualificação.
 
-A ideia nasceu de vivências reais no Distrito Federal. Morando no Areal, região onde tem um albergue, e trabalhando no centro de Taguatinga, observei de perto a realidade de pessoas em situação de vulnerabilidade e a dificuldade de reinserção no mercado de trabalho. Isso gerou uma pergunta que virou projeto: como transformar a vida de alguém através do trabalho, dando acesso a oportunidades reais de renda e contribuindo para uma sociedade mais segura e justa?
+Essa experiência despertou uma pergunta que acabou se transformando no ELEVA: como utilizar a tecnologia para ampliar o acesso a oportunidades reais de renda, promovendo inclusão produtiva e contribuindo para uma sociedade mais segura e justa?
 
-Todo o código, arquitetura, identidade visual e pesquisa de contexto foram desenvolvidos por mim.
+O projeto foi concebido, pesquisado, modelado, documentado e desenvolvido integralmente por mim durante a Residência Tecnológica UCB × Porto Digital.
 
 ---
 
