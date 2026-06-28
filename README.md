@@ -82,4 +82,4 @@ Todo o código, arquitetura, identidade visual e pesquisa de contexto foram dese
 
 ## Contato
 
-[LinkedIn](www.linkedin.com/in/carla-barrosoo)
+[LinkedIn](http://www.linkedin.com/in/carla-barrosoo)
