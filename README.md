@@ -74,7 +74,7 @@ Abra qualquer `.html` no navegador ou use Live Server (VS Code).
 
 Idealizado e desenvolvido por **Carla Barroso**, estudante de Análise e Desenvolvimento de Sistemas na UCB, Residência Tecnológica Porto Digital, 2026.
 
-A ideia nasceu de vivências reais no Distrito Federal. Morando no Areal, região onde havia um albergue, e trabalhando no centro de Taguatinga, observei de perto a realidade de pessoas em situação de vulnerabilidade e a dificuldade de reinserção no mercado de trabalho. Isso gerou uma pergunta que virou projeto: como transformar a vida de alguém através do trabalho, dando acesso a oportunidades reais de renda e contribuindo para uma sociedade mais segura e justa?
+A ideia nasceu de vivências reais no Distrito Federal. Morando no Areal, região onde tem um albergue, e trabalhando no centro de Taguatinga, observei de perto a realidade de pessoas em situação de vulnerabilidade e a dificuldade de reinserção no mercado de trabalho. Isso gerou uma pergunta que virou projeto: como transformar a vida de alguém através do trabalho, dando acesso a oportunidades reais de renda e contribuindo para uma sociedade mais segura e justa?
 
 Todo o código, arquitetura, identidade visual e pesquisa de contexto foram desenvolvidos por mim.
 
