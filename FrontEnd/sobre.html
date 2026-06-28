@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleva | Infraestrutura de Inserção Produtiva</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo-completa.png" alt="Eleva Logo"></a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Como funciona</a>
+            <a href="pesquisa.html">Profissionais</a>
+            <a href="parceiros.html">Parceiros</a>
+            <a href="entrar.html" class="btn-entrar" id="btn-nav-global">Entrar</a>
+        </nav>
+    </header>
+
+    <section class="sobre-hero">
+        <div class="section-container">
+            <span class="tag-propósito">O Propósito do Eleva</span>
+            <h1>Uma ponte digital entre qualificação profissional e confiança para contratar</h1>
+            <p class="sub-manifesto">Transformando o esforço de trabalhadores autônomos em reputação econômica verificável.</p>
+        </div>
+    </section>
+
+    <section class="sobre-historia">
+        <div class="section-container grid-sobre">
+            <div class="historia-texto">
+                <h2>Como o Eleva nasceu?</h2>
+                <P>O Eleva nasceu da percepção de um problema comum em muitos programas de capacitação profissional: mesmo depois de concluir cursos e obter certificados, muitas pessoas continuam sem conseguir acessar oportunidades de trabalho.</P>
+                <P>Ao mesmo tempo, pessoas que precisam de serviços autônomos também enfrentam dificuldades para encontrar profissionais de confiança e contratar com mais segurança.</P>
+                <p>Diante dessa realidade, surgiu a ideia de criar uma forma mais segura e acessível de aproximar profissionais qualificados de pessoas que precisam contratar serviços com mais confiança, gerando oportunidades e contribuindo para o impacto social.</p>
+            </div>
+            <div class="historia-dados">
+                <h3>O Cenário Local</h3>
+                <div class="card-dado">
+                    <h4>+66.000</h4>
+                    <p>Certificados emitidos pelo QualificaDF desde 2022.</p>
+                </div>
+                <div class="card-dado">
+                    <h4>+19.000</h4>
+                    <p>Alunos qualificados na construção civil pelo RenovaDF.</p>
+                </div>
+                <div class="card-dado">
+                    <h4>3.521</h4>
+                    <p>Pessoas mapeadas em extrema vulnerabilidade pelo Censo Distrital.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sobre-arquitetura">
+        <div class="section-container">
+            <h2 class="titulo-arquitetura">Nossa Arquitetura de Confiança Multicamada</h2>
+            <p class="sub-arquitetura">Ao contrário de aplicativos comuns, nós mitigamos o risco operacional antes, durante e após a execução do serviço:</p>
+            <div class="linha-tempo-pilares">
+                <div class="pilar-box">
+                    <div class="pilar-header"><span class="num-pilar">01</span><h3>Validação Institucional</h3></div>
+                    <p> Todos os profissionais passam por um processo de validação institucional antes de ingressar na plataforma, garantindo mais segurança e confiabilidade para quem contrata.</p>
+                </div>
+                <div class="pilar-box">
+                    <div class="pilar-header"><span class="num-pilar">02</span><h3>Rastreabilidade Operacional</h3></div>
+                    <p>Todas as etapas do serviço ficam registradas na plataforma, criando uma operação mais transparente e rastreável para contratantes e profissionais.</p>
+                </div>
+                <div class="pilar-box">
+                    <div class="pilar-header"><span class="num-pilar">03</span><h3>Segurança Financeira</h3></div>
+                    <p>Utilizamos o modelo Escrow. O pagamento do contratante fica retido de maneira preventiva O início, o andamento e o encerramento do serviço são auditados pelo sistema em tempo real por meio de códigos de confirmação bilaterais presenciais.e só é liberado para o profissional após a confirmação mútua da entrega.</p>
+                </div>
+                <div class="pilar-box">
+                    <div class="pilar-header"><span class="num-pilar">04</span><h3>Reputação Progressiva</h3></div>
+                    <p>A reputação do profissional é construída a partir de serviços reais realizados na plataforma, criando um histórico verificável de experiência e confiança.</p>
+                </div>
+                <div class="pilar-box">
+                    <div class="pilar-header"><span class="num-pilar">05</span><h3>Perfil Profissional Verificável</h3></div>
+                    <p>Os profissionais possuem perfis transparentes e humanizados, destacando experiências, habilidades e validações institucionais.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <p>© 2026 Eleva</p>
+            <p>Projetado e Idealizado por Carla Barroso</p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tipo = localStorage.getItem('usuarioTipo');
+            const btnNav = document.getElementById('btn-nav-global');
+            if(tipo && btnNav) {
+                btnNav.textContent = 'Meu Painel';
+                btnNav.href = `painel-${tipo}.html`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleva | Instituições Parceiras</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo-completa.png" alt="Eleva Logo"></a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Como funciona</a>
+            <a href="pesquisa.html">Profissionais</a>
+            <a href="parceiros.html">Parceiros</a>
+            <a href="entrar.html" class="btn-entrar" id="btn-nav-global">Entrar</a>
+        </nav>
+    </header>
+
+    <div class="breadcrumbs section-container">
+        <p><a href="index.html">Início</a> > <span class="atual">Parceiros</span></p>
+    </div>
+
+    <main class="section-container">
+        <div class="cabecalho-secao" style="margin-bottom: 30px; text-align: center;">
+            <h2 style="color: var(--azul-institucional); font-size: 28px; font-weight: 700;">Instituições Parceiras</h2>
+            <p style="color: var(--texto-cinza);">Conheça as organizações e programas governamentais que validam nossa rede de impacto.</p>
+        </div>
+
+        <div class="grid-parceiros" id="container-parceiros" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; padding-bottom: 50px;">
+            <p style="text-align:center; grid-column: 1/-1; color: #64748B;">Carregando instituições parceiras...</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>© 2026 Eleva</p>
+            <p>Projetado e Idealizado por Carla Barroso</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_URL = 'https://cahdiel.pythonanywhere.com/api';
+
+        const infoInstituicoes = {
+            'Instituto Horizonte': {
+                descricao: 'Organização social voltada à capacitação profissional e inclusão de jovens e adultos em situação de vulnerabilidade, oferecendo formação em serviços operacionais, atendimento e manutenção.',
+                local: '📍 Ceilândia, DF',
+                icone: ''
+            },
+            'Projeto Caminhos': {
+                descricao: 'Iniciativa comunitária que promove qualificação profissional gratuita e apoio ao desenvolvimento de trabalhadores autônomos por meio de oficinas práticas e acompanhamento social.',
+                local: '📍 Samambaia, DF',
+                icone: ''
+            },
+            'Rede Novo Ofício': {
+                descricao: 'Programa de formação técnica voltado à preparação de profissionais para áreas como construção civil, manutenção residencial e serviços urbanos',
+                local: '📍 Taguatinga, DF',
+                icone: ''
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const tipo = localStorage.getItem('usuarioTipo');
+            const btnNav = document.getElementById('btn-nav-global');
+            if(tipo && btnNav) {
+                btnNav.textContent = 'Meu Painel';
+                btnNav.href = `painel-${tipo}.html`;
+            }
+
+            const container = document.getElementById('container-parceiros');
+
+            try {
+                const response = await fetch(`${API_URL}/instituicoes`);
+                const instituicoes = await response.json();
+
+                if (instituicoes.length === 0) {
+                    container.innerHTML = `<p style="text-align:center; grid-column: 1/-1; color: #64748B;">Nenhuma instituição encontrada no banco de dados.</p>`;
+                    return;
+                }
+
+                container.innerHTML = ''; 
+
+                instituicoes.forEach(inst => {
+                    const detalhes = infoInstituicoes[inst.nome] || {
+                        descricao: 'Instituição parceira focada em fomento produtivo, inserção profissional e reputação auditável.',
+                        local: '📍 Distrito Federal',
+                        icone: '🤝'
+                    };
+
+                    const cardHTML = `
+                        <a href="dashboard.html" style="text-decoration: none; color: inherit; display: block;">
+                            <div class="ong-profile-card" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid var(--borda); height: 100%; margin-bottom: 0;">
+                                <div class="ong-avatar-info">
+                                    <div class="ong-icon-placeholder" style="font-size: 24px;">${detalhes.icone}</div>
+                                    <div class="ong-nome-dados">
+                                        <h3 style="color: var(--azul-institucional); font-size: 20px; font-weight: 700; margin: 0;">${inst.nome}</h3>
+                                        <span class="badge-tipo-instituicao">Programa Parceiro</span>
+                                        <p class="ong-meta" style="margin-top: 5px; font-size: 13px;">${detalhes.local}</p>
+                                    </div>
+                                </div>
+                                <div class="ong-sobre-box" style="margin-top: 15px; border-top: 1px solid var(--borda); padding-top: 15px;">
+                                    <p style="font-size: 14px; color: var(--texto-cinza); text-align: justify; line-height: 1.5;">${detalhes.descricao}</p>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                    container.innerHTML += cardHTML;
+                });
+
+            } catch (error) {
+                console.error("Erro ao buscar instituições:", error);
+                container.innerHTML = `<p style="text-align:center; grid-column: 1/-1; color: #EF4444;">Erro ao conectar ao servidor. Certifique se o app.py está rodando.</p>`;
+            }
+        });
+    </script>
+    
+</body>
+</html>

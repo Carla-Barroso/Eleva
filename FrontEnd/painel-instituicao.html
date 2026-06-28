@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleva | Painel da Instituição Parceira</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo-completa.png" alt="Eleva Logo"></a>
+        </div>
+        <nav class="nav-links">
+            <span style="font-weight: 500; color: var(--azul-institucional);" id="nome-usuario-nav">Carregando...</span>
+            <a href="#" onclick="fazerLogout()" style="color: #EF4444; font-weight: 600;">Sair da conta</a>
+        </nav>
+    </header>
+
+    <div class="layout-painel">
+        
+        <aside class="dash-sidebar">
+            <div class="nav-category">Visão Geral</div>
+            <a href="#" class="nav-item active" onclick="showSection('dashboard', this)">Relatórios de Impacto</a>
+
+            <div class="nav-category">Gestão de Profissionais</div>
+            <a href="#" class="nav-item" onclick="showSection('cadastrar-pro', this)">Cadastrar Profissional</a>
+            <a href="#" class="nav-item" onclick="showSection('gerenciar-pro', this)">Gerenciar Perfils</a>
+            <a href="#" class="nav-item" onclick="showSection('validar-docs', this)">Validar Documentos</a>
+            <a href="#" class="nav-item" onclick="showSection('acompanhamento', this)">Acompanhamento</a>
+
+            <div class="nav-category">Governança & Financeiro</div>
+            <a href="#" class="nav-item" onclick="showSection('conflitos', this)">Mediação de Conflitos</a>
+            <a href="#" class="nav-item" onclick="showSection('recebimentos', this)">Recebimentos</a>
+
+            <div class="nav-category">Configurações</div>
+            <a href="#" class="nav-item" onclick="showSection('perfil-publico', this)">Perfil Público</a>
+        </aside>
+
+        <main class="dash-main">
+            
+            <section id="dashboard" class="dash-section active">
+                <h2 style="color: var(--azul-institucional); margin-bottom: 20px;">Impacto Gerado</h2>
+                
+                <div class="metrics-grid-ong" style="margin-bottom: 30px;">
+                    <div class="metric-card-ong">
+                        <div class="metric-icon bg-light-blue"></div>
+                        <div class="metric-data"><h4>128</h4><p>Profissionais Cadastrados</p></div>
+                    </div>
+                    <div class="metric-card-ong">
+                        <div class="metric-icon bg-light-green"></div>
+                        <div class="metric-data"><h4>96</h4><p>Profissionais Ativos</p></div>
+                    </div>
+                    <div class="metric-card-ong text-destaque-renda">
+                        <div class="metric-icon bg-light-purple"></div>
+                        <div class="metric-data"><h4>R$ 84.230</h4><p>Renda Gerada</p></div>
+                    </div>
+                    <div class="metric-card-ong">
+                        <div class="metric-icon bg-light-orange"></div>
+                        <div class="metric-data"><h4>532</h4><p>Serviços Realizados</p></div>
+                    </div>
+                </div>
+
+                <div class="card-dash">
+                    <h3>Alertas Recentes</h3>
+                    <ul style="list-style: none; color: var(--texto-cinza);">
+                        <li style="margin-bottom: 10px;"><strong>3 profissionais</strong> estão com documentos pendentes de validação.</li>
+                        <li><strong>1 contestação</strong> aberta aguardando parecer da instituição.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="cadastrar-pro" class="dash-section">
+                <div class="card-dash">
+                    <h2>Novo Cadastro de Profissional</h2>
+                    <p style="color: var(--texto-cinza); margin-bottom: 20px;">Preencha os dados básicos. Ao finalizar, o sistema gerará um <strong>ID de Ativação</strong> para o profissional criar a senha dele.</p>
+                    
+                    <form onsubmit="cadastrarProfissional(event)">
+                        <div class="form-group-row-compact">
+                            <div class="form-group">
+                                <label>Nome Completo</label>
+                                <input type="text" id="nome-profissional" placeholder="Nome do profissional" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Área de Atuação Principal</label>
+                                <input type="text" id="profissao-profissional" placeholder="Ex: Eletricista" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>História de Vida</label>
+                            <textarea id="sobre-profissional" rows="3" placeholder="Resumo sobre a experiência e vida do profissional..."></textarea>
+                        </div>
+
+                        <div class="form-group-row-compact">
+                            <div class="form-group">
+                                <label>Upload de Documentos (RG/CPF)</label>
+                                <input type="file">
+                            </div>
+                            <div class="form-group">
+                                <label>Certificações (Opcional)</label>
+                                <input type="file" multiple>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-auth-action" style="width: auto; padding: 12px 30px;">Salvar e Gerar ID</button>
+                    </form>
+
+                    <div id="id-gerado" style="display: none; margin-top: 25px; background-color: #DCFCE7; border: 1px solid #16A34A; padding: 20px; border-radius: 8px;">
+    <h3 style="color: #16A34A; border: none; margin-bottom: 5px;">Cadastro Realizado!</h3>
+    <p style="color: var(--texto-cinza);">Forneça este ID para o profissional acessar o sistema pela primeira vez:</p>
+    <strong id="id-texto-exibicao" style="font-size: 24px; color: var(--azul-institucional); display: block; margin-top: 10px;"></strong>
+</div>
+                </div>
+            </section>
+
+            <section id="gerenciar-pro" class="dash-section">
+                <div class="card-dash">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="margin: 0;">Lista de Profissionais</h2>
+                        <input type="text" placeholder="Buscar por nome..." onkeyup="filtrarTabelaLocal(this.value)" style="padding: 8px 15px; border: 1px solid var(--borda); border-radius: 6px;">
+                    </div>
+                    
+                    <div class="tabela-gestao-container">
+                        <table class="tabela-gestao">
+                            <thead>
+                                <tr>
+                                    <th>Profissional</th>
+                                    <th>Profissão</th>
+                                    <th>Status do Perfil</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="corpo-tabela-profissionais">
+                                <!-- Preenchido dinamicamente via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="validar-docs" class="dash-section">
+                <div class="card-dash">
+                    <h2>Validação de Documentos e Certificados</h2>
+                    <p style="color: var(--texto-cinza); margin-bottom: 20px;">Analise a documentação pendente para ativar o perfil dos profissionais publicamente.</p>
+
+                    <div class="tabela-gestao-container">
+                        <table class="tabela-gestao">
+                            <thead>
+                                <tr>
+                                    <th>Profissional</th>
+                                    <th>Documento</th>
+                                    <th>Data de Envio</th>
+                                    <th>Ações de Validação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ana Júlia</td>
+                                    <td>📎 Identidade (RG) e CPF</td>
+                                    <td>Hoje</td>
+                                    <td class="acoes-td">
+                                        <button class="btn-acao-sm btn-acao-verde" onclick="alert('Documento Aprovado. Perfil liberado!')">Aprovar</button>
+                                        <button class="btn-acao-sm btn-acao-vermelho">Reprovar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Roberto Alves</td>
+                                    <td>📎 Certificado NR-10</td>
+                                    <td>Ontem</td>
+                                    <td class="acoes-td">
+                                        <button class="btn-acao-sm btn-acao-verde">Aprovar</button>
+                                        <button class="btn-acao-sm btn-acao-vermelho">Reprovar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="conflitos" class="dash-section">
+                <div class="card-dash">
+                    <h2>Central de Mediação</h2>
+                    <p style="color: var(--texto-cinza); margin-bottom: 20px;">Acompanhe problemas relatados por clientes em relação aos profissionais da sua instituição.</p>
+
+                    <div style="border: 1px solid var(--borda); padding: 20px; border-radius: 8px; border-left: 4px solid #DC2626; background: #F8FAFC;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <h4 style="color: var(--azul-institucional); margin: 0;">Serviço Incompleto (Cliente: Carlos Eduardo)</h4>
+                            <span class="badge-status status-pendente-doc">Em Análise</span>
+                        </div>
+                        <p style="font-size: 14px; color: var(--texto-cinza);"><strong>Profissional:</strong> João Silva | <strong>Serviço:</strong> Reparo de Tomadas</p>
+                        <p style="font-size: 13px; color: #64748B; margin-top: 10px;">Cliente relata que o serviço foi cobrado mas a fiação ficou exposta. Aguardando parecer da instituição para liberação do pagamento retido (Escrow).</p>
+                        
+                        <div style="margin-top: 15px; display: flex; gap: 10px;">
+                            <button class="btn-acao-sm">Visualizar Evidências</button>
+                            <button class="btn-acao-sm" style="background-color: var(--azul-institucional); color: white;">Registrar Parecer Institucional</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="perfil-publico" class="dash-section">
+                <div class="perfil-header" style="margin-bottom: 20px;">
+                    <div class="perfil-info-basic">
+                        <div class="foto-perfil" style="background-color: #E0F2FE;">🤝</div>
+                        <div>
+                            <h2 style="margin: 0; color: var(--azul-institucional);" id="nome-instituicao-titulo">Instituto Caminhos</h2>
+                            <p style="margin: 5px 0 0; color: var(--texto-cinza);">📍 Taguatinga, DF</p>
+                        </div>
+                    </div>
+                    
+                    <div class="status-toggle">
+                        <span>Perfil Público Ativo:</span>
+                        <label class="switch">
+                            <input type="checkbox" checked title="Deixar página da ONG pública">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="card-dash">
+                    <h3>Dados Públicos</h3>
+                    <form onsubmit="event.preventDefault(); alert('Alterações salvas!');">
+                        <div class="form-group">
+                            <label>Descrição da Instituição</label>
+                            <textarea rows="3">Organização da sociedade civil que atua há mais de 8 anos promovendo inclusão social e geração de renda...</textarea>
+                        </div>
+                        <div class="form-group-row-compact">
+                            <div class="form-group">
+                                <label>Site Oficial</label>
+                                <input type="url" value="www.institutocaminhos.org.br">
+                            </div>
+                            <div class="form-group">
+                                <label>Instagram</label>
+                                <input type="text" value="@instcaminhos">
+                            </div>
+                        </div>
+                        <button class="btn-auth-action" style="width: auto; padding: 10px 25px;">Salvar Alterações</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="recebimentos" class="dash-section">
+                <div class="card-dash">
+                    <h2>Recebimentos da Instituição</h2>
+                    <p style="color: var(--texto-cinza);">Acompanhe os repasses e doações destinados à sua instituição através da infraestrutura Eleva.</p>
+                    
+                    <div style="background-color: #FFF3ED; border: 1px solid #FFE4D6; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                        <h3 style="color: var(--laranja-primario); margin: 0 0 5px 0;">Saldo Disponível para Repasse</h3>
+                        <p style="font-size: 28px; font-weight: 700; color: var(--azul-institucional); margin: 0;">R$ 1.450,00</p>
+                        <button class="btn-auth-action" style="width: auto; padding: 8px 20px; margin-top: 15px; font-size: 13px;">Solicitar Saque</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="acompanhamento" class="dash-section">
+                <div class="card-dash">
+                    <h2>Acompanhamento Técnico</h2>
+                    <p style="color: var(--texto-cinza);">Visão consolidada do desenvolvimento socioprofissional dos seus monitorados.</p>
+                    <p style="margin-top: 15px; font-style: italic; color: #64748B;">Módulo de relatórios avançados de evolução em implementação.</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MODAL DE EDIÇÃO DINÂMICA DE PROFISSIONAL -->
+    <div id="modal-editar-prof" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); overflow: auto; padding-top: 50px;">
+        <div class="card-dash" style="background-color: #fff; margin: 3% auto; padding: 25px; border-radius: 8px; width: 90%; max-width: 600px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--borda); padding-bottom: 10px;">
+                <h3 style="margin: 0; color: var(--azul-institucional); border: none; padding: 0;">Editar Perfil do Profissional</h3>
+                <span onclick="fecharModalEdicao()" style="cursor: pointer; font-size: 24px; font-weight: bold; color: #aaa;">&times;</span>
+            </div>
+            <form id="form-editar-profissional" onsubmit="salvarEdicaoProfissional(event)">
+                <input type="hidden" id="edit-prof-id">
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="edit-prof-nome" required style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid var(--borda); border-radius: 4px;">
+                </div>
+                <div class="form-group" style="margin-top: 12px;">
+                    <label>Área de Atuação Principal (Profissão)</label>
+                    <input type="text" id="edit-prof-profissao" required style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid var(--borda); border-radius: 4px;">
+                </div>
+                <div class="form-group" style="margin-top: 12px;">
+                    <label>Categoria</label>
+                    <select id="edit-prof-categoria" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid var(--borda); border-radius: 4px; background: white;">
+                        <option value="Manutenção e Reparos">Manutenção e Reparos</option>
+                        <option value="Obras e Reformas">Obras e Reformas</option>
+                        <option value="Limpeza">Limpeza</option>
+                        <option value="Tecnologia">Tecnologia</option>
+                        <option value="Geral">Geral</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-top: 12px;">
+                    <label>Região de Atendimento</label>
+                    <input type="text" id="edit-prof-regiao" required style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid var(--borda); border-radius: 4px;">
+                </div>
+                <div class="form-group" style="margin-top: 12px;">
+                    <label>História de Vida</label>
+                    <textarea id="edit-prof-sobre" rows="3" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid var(--borda); border-radius: 4px; font-family: inherit;"></textarea>
+                </div>
+                <div class="form-group" style="margin-top: 12px;">
+                    <label>Habilidades (separadas por vírgula)</label>
+                    <input type="text" id="edit-prof-habilidades" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid var(--borda); border-radius: 4px;">
+                </div>
+                <div class="form-group-row-compact" style="display: flex; gap: 15px; margin-top: 12px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label>Taxa Visita (R$)</label>
+                        <input type="text" id="edit-prof-preco-inicial" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid var(--borda); border-radius: 4px;">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Preço Diária (R$)</label>
+                        <input type="text" id="edit-prof-preco-diaria" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid var(--borda); border-radius: 4px;">
+                    </div>
+                </div>
+                <input type="hidden" id="edit-prof-status">
+                <div style="margin-top: 25px; display: flex; justify-content: flex-end; gap: 10px;">
+                    <button type="button" onclick="fecharModalEdicao()" style="padding: 10px 20px; background-color: #64748B; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500;">Cancelar</button>
+                    <button type="submit" style="padding: 10px 20px; background-color: var(--azul-institucional); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500;">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let listaGlobalProfissionais = [];
+
+        function showSection(sectionId, element) {
+            document.querySelectorAll('.dash-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+            
+            const sectionTarget = document.getElementById(sectionId);
+            if(sectionTarget) sectionTarget.classList.add('active');
+            if(element) element.classList.add('active');
+        }
+
+        function fazerLogout() {
+            localStorage.removeItem('usuarioNome');
+            localStorage.removeItem('usuarioTipo');
+            window.location.href = 'entrar.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const meuNome = localStorage.getItem('usuarioNome');
+            if (!meuNome) {
+                window.location.href = 'entrar.html';
+                return;
+            }
+            document.getElementById('nome-usuario-nav').textContent = meuNome;
+            const elTitulo = document.getElementById('nome-instituicao-titulo');
+            if(elTitulo) elTitulo.textContent = meuNome;
+            
+            carregarProfissionaisInstituicao();
+        });
+
+        async function carregarProfissionaisInstituicao() {
+            const meuNome = localStorage.getItem('usuarioNome');
+            const tbody = document.getElementById('corpo-tabela-profissionais');
+            if(!tbody) return;
+
+            try {
+                const response = await fetch(`https://cahdiel.pythonanywhere.com/api/instituicoes/profissionais/${encodeURIComponent(meuNome)}`);
+                const profissionais = await response.json();
+                listaGlobalProfissionais = profissionais;
+
+                if(profissionais.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 20px; color:var(--texto-cinza);">Nenhum profissional cadastrado por sua instituição até o momento.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = '';
+                profissionais.forEach(p => {
+                    let statusBadge = '';
+                    let acaoBotaoPausar = '';
+
+                    if(p.status === 'Ativo' || !p.status) {
+                        statusBadge = '<span class="badge-status status-ativo">Ativo</span>';
+                        acaoBotaoPausar = `<button class="btn-acao-sm" style="color: #D97706; font-weight:600;" onclick="alternarStatusProfissional(${p.id}, 'Pausado')">Pausar</button>`;
+                    } else {
+                        statusBadge = '<span class="badge-status status-pausado">Pausado</span>';
+                        acaoBotaoPausar = `<button class="btn-acao-sm btn-acao-verde" style="font-weight:600;" onclick="alternarStatusProfissional(${p.id}, 'Ativo')">Ativar</button>`;
+                    }
+
+                    tbody.innerHTML += `
+                        <tr>
+                            <td><strong>${p.nome}</strong><br><span style="font-size: 11px; color: #64748B;">ID Ref: #${p.id}</span></td>
+                            <td>${p.profissao}</td>
+                            <td>${statusBadge}</td>
+                            <td class="acoes-td">
+                                <button class="btn-acao-sm" style="font-weight:600;" onclick="abrirModalEdicao(${p.id})">Editar</button>
+                                ${acaoBotaoPausar}
+                                <button class="btn-acao-sm btn-acao-vermelho" style="font-weight:600;" onclick="excluirProfissionalDefinitivo(${p.id})">Excluir</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch (error) {
+                console.error(error);
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#EF4444; padding:20px;">Erro ao carregar lista do servidor local.</td></tr>';
+            }
+        }
+
+        function filtrarTabelaLocal(texto) {
+            const t = texto.toLowerCase();
+            const tbody = document.getElementById('corpo-tabela-profissionais');
+            if(!tbody) return;
+            
+            const linhas = tbody.getElementsByTagName('tr');
+            for(let i = 0; i < linhas.length; i++) {
+                if(linhas[i].innerText.toLowerCase().includes(t)) {
+                    linhas[i].style.display = '';
+                } else {
+                    linhas[i].style.display = 'none';
+                }
+            }
+        }
+
+        async function alternarStatusProfissional(id, novoStatus) {
+            const prof = listaGlobalProfissionais.find(p => p.id === id);
+            if(!prof) return;
+
+            const dadosAtualizados = { ...prof, status: novoStatus };
+
+            try {
+                const response = await fetch(`https://cahdiel.pythonanywhere.com/api/profissionais/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dadosAtualizados)
+                });
+                const res = await response.json();
+                if(res.sucesso) {
+                    carregarProfissionaisInstituicao();
+                } else {
+                    alert(res.mensagem);
+                }
+            } catch(e) {
+                alert("Erro de conexão ao alternar status.");
+            }
+        }
+
+        function abrirModalEdicao(id) {
+            const prof = listaGlobalProfissionais.find(p => p.id === id);
+            if(!prof) return;
+
+            document.getElementById('edit-prof-id').value = prof.id;
+            document.getElementById('edit-prof-nome').value = prof.nome;
+            document.getElementById('edit-prof-profissao').value = prof.profissao;
+            document.getElementById('edit-prof-categoria').value = prof.categoria || 'Geral';
+            document.getElementById('edit-prof-regiao').value = prof.regiao || '';
+            document.getElementById('edit-prof-sobre').value = prof.sobre_mim || '';
+            document.getElementById('edit-prof-habilidades').value = prof.habilidades || '';
+            document.getElementById('edit-prof-preco-inicial').value = prof.preco_inicial || '80,00';
+            document.getElementById('edit-prof-preco-diaria').value = prof.preco_diaria || '200,00';
+            document.getElementById('edit-prof-status').value = prof.status || 'Ativo';
+
+            document.getElementById('modal-editar-prof').style.display = 'block';
+        }
+
+        function fecharModalEdicao() {
+            document.getElementById('modal-editar-prof').style.display = 'none';
+        }
+
+        async function salvarEdicaoProfissional(event) {
+            event.preventDefault();
+            const id = document.getElementById('edit-prof-id').value;
+
+            const dadosEdicao = {
+                nome: document.getElementById('edit-prof-nome').value,
+                profissao: document.getElementById('edit-prof-profissao').value,
+                categoria: document.getElementById('edit-prof-categoria').value,
+                regiao: document.getElementById('edit-prof-regiao').value,
+                sobre_mim: document.getElementById('edit-prof-sobre').value,
+                habilidades: document.getElementById('edit-prof-habilidades').value,
+                preco_inicial: document.getElementById('edit-prof-preco-inicial').value,
+                preco_diaria: document.getElementById('edit-prof-preco-diaria').value,
+                status: document.getElementById('edit-prof-status').value
+            };
+
+            try {
+                const response = await fetch(`https://cahdiel.pythonanywhere.com/api/profissionais/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dadosEdicao)
+                });
+                const res = await response.json();
+                if(res.sucesso) {
+                    fecharModalEdicao();
+                    carregarProfissionaisInstituicao();
+                } else {
+                    alert(res.mensagem);
+                }
+            } catch(e) {
+                alert("Erro ao salvar modificações.");
+            }
+        }
+
+        async function excluirProfissionalDefinitivo(id) {
+            const prof = listaGlobalProfissionais.find(p => p.id === id);
+            if(!prof) return;
+
+            if(!confirm(`⚠️ ATENÇÃO: Deseja excluir DEFINITIVAMENTE "${prof.nome}"?\n\nIsso removerá o perfil público e a conta de acesso associada a este profissional. Esta ação não pode ser desfeita.`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://cahdiel.pythonanywhere.com/api/profissionais/${id}`, {
+                    method: 'DELETE'
+                });
+                const res = await response.json();
+                if(res.sucesso) {
+                    carregarProfissionaisInstituicao();
+                } else {
+                    alert(res.mensagem);
+                }
+            } catch(e) {
+                alert("Erro ao conectar com o servidor para exclusão.");
+            }
+        }
+
+        async function cadastrarProfissional(event) {
+            event.preventDefault();
+
+            const profissional = {
+                nome: document.getElementById('nome-profissional').value,
+                profissao: document.getElementById('profissao-profissional').value,
+                categoria: 'Geral',
+                regiao: 'DF',
+                sobre_mim: document.getElementById('sobre-profissional').value,
+                instituicao: localStorage.getItem('usuarioNome')
+            };
+
+            try {
+                const response = await fetch('https://cahdiel.pythonanywhere.com/api/profissionais', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(profissional)
+                });
+
+                const data = await response.json();
+
+                if (data.sucesso) {
+            alert('Profissional cadastrado com sucesso!');
+            
+            // Escreve o ID na tela e mostra a caixinha verde
+            document.getElementById('id-texto-exibicao').textContent = `ID: ${data.login}`;
+            document.getElementById('id-gerado').style.display = 'block';
+            
+            // Limpa os campos do formulário para facilitar o próximo cadastro
+            event.target.reset(); 
+            
+            // Atualiza a tabela abaixo automaticamente
+            carregarProfissionaisInstituicao();
+        } else {
+            alert('Erro ao cadastrar profissional.');
+        }
+
+            } catch (error) {
+                console.error(error);
+                alert('Erro de conexão com servidor.');
+            }
+        }
+    </script>
+</body>
+</html>

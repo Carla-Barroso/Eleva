@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleva | Painel do Cliente</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Estilos dos Modais */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(3px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; opacity: 0; pointer-events: none; transition: 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        
+        .modal-card {
+            background: #ffffff; padding: 30px; border-radius: 12px;
+            width: 90%; max-width: 420px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            text-align: center; transform: translateY(20px); transition: 0.3s ease;
+        }
+        .modal-overlay.active .modal-card { transform: translateY(0); }
+
+        /* Estilos da Foto de Perfil */
+        .foto-container {
+            position: relative; width: 90px; height: 90px; border-radius: 50%;
+            overflow: hidden; cursor: pointer; border: 3px solid #F1F5F9;
+            background-color: #E0F2FE; display: flex; align-items: center; justify-content: center;
+            background-size: cover; background-position: center; flex-shrink: 0; transition: 0.2s;
+        }
+        .foto-container:hover { border-color: var(--azul-institucional); }
+        .foto-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 35%;
+            background: rgba(15, 23, 42, 0.6); display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 14px; opacity: 0; transition: 0.2s;
+        }
+        .foto-container:hover .foto-overlay { opacity: 1; }
+        .icon-default { font-size: 35px; color: #38BDF8; }
+
+        /* Estrelas de Avaliação */
+        .star-rating i { color: #CBD5E1; cursor: pointer; transition: 0.2s; }
+        .star-rating i.active { color: #F59E0B; }
+        .stars-display i { color: #F59E0B; font-size: 12px; margin-right: 2px;}
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo-completa.png" alt="Eleva Logo"></a>
+        </div>
+        <nav class="nav-links">
+            <span style="font-weight: 500; color: var(--azul-institucional);" id="nome-usuario-nav">Carregando...</span>
+            <a href="#" onclick="fazerLogout()" style="color: #EF4444; font-weight: 600;">Sair da conta</a>
+        </nav>
+    </header>
+
+    <div class="layout-painel" style="background-color: #ece7e0; min-height: 100vh; padding-bottom: 50px;">
+        
+        <aside class="dash-sidebar">
+            <div class="nav-category">Meu Impacto</div>
+            <a href="#" class="nav-item active" onclick="showSection('impacto', this)">Perfil e Impacto Social</a>
+
+            <div class="nav-category">Explorar</div>
+            <a href="pesquisa.html" class="nav-item">Buscar Serviços</a>
+
+            <div class="nav-category">Meus Pedidos</div>
+            <a href="#" class="nav-item" onclick="showSection('acompanhar', this)">Acompanhar Serviço</a>
+            <a href="#" class="nav-item" onclick="showSection('historico', this)">Histórico e Avaliações</a>
+
+            <div class="nav-category">Financeiro</div>
+            <a href="#" class="nav-item" onclick="showSection('pagamentos', this)">Pagamento Seguro</a>
+
+            <div class="nav-category">Suporte</div>
+            <a href="#" class="nav-item" onclick="showSection('conflitos', this)">Central de Resolução</a>
+        </aside>
+
+        <main class="dash-main">
+            
+            <section id="impacto" class="dash-section active">
+                <div class="card-dash" style="margin-bottom: 20px; border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div style="display: flex; gap: 20px; align-items: flex-start; width: 100%;">
+                            
+                            <div>
+                                <div class="foto-container" id="foto-preview" onclick="document.getElementById('upload-foto').click()">
+                                    <i class="fa-solid fa-user icon-default" id="icone-padrao"></i>
+                                    <div class="foto-overlay"><i class="fa-solid fa-camera"></i></div>
+                                </div>
+                                <input type="file" id="upload-foto" accept="image/png, image/jpeg" style="display: none;" onchange="alterarFoto(event)">
+                            </div>
+
+                            <div style="flex-grow: 1;">
+                                <h2 style="margin: 0; color: var(--azul-institucional); font-size: 24px;" id="nome-impacto">Cliente</h2>
+                                <p style="margin: 5px 0 15px; color: var(--texto-cinza); font-weight: 500;">Cliente de Impacto Nível Ouro</p>
+                                
+                                <div>
+                                    <label style="font-size: 12px; font-weight: 600; color: #64748B; text-transform: uppercase; letter-spacing: 0.5px;">Sobre Mim</label>
+                                    <textarea id="bio-cliente" placeholder="Escreva um pouco sobre você ou o impacto que deseja causar na comunidade..." style="width: 100%; padding: 12px; border: 1px solid #E2E8F0; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 14px; color: #334155; resize: vertical; min-height: 80px; margin-top: 5px; background-color: #F8FAFC; outline: none;"></textarea>
+                                    <button onclick="salvarBio(event)" style="margin-top: 8px; background-color: white; border: 1px solid var(--azul-institucional); color: var(--azul-institucional); padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s;">
+                                        <i class="fa-solid fa-floppy-disk" style="margin-right: 5px;"></i> Salvar Biografia
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="status-toggle" style="margin-left: 20px;">
+                            <span style="font-size: 13px; color: #64748B; font-weight: 500;">Perfil Público</span>
+                            <label class="switch" style="margin-left: 8px;">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-dash" style="margin-bottom: 20px; border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <div class="metrics-grid-ong" style="grid-template-columns: repeat(3, 1fr);">
+                        <div class="metric-card-ong" style="border: 1px solid #E2E8F0; box-shadow: none; background: #fff;">
+                            <div class="metric-icon" style="background-color: #FFF7ED; color: #EA580C; display: flex; align-items: center; justify-content: center; font-size: 20px;"><i class="fa-solid fa-users"></i></div>
+                            <div class="metric-data"><h4>12</h4><p>Profissionais Apoiados</p></div>
+                        </div>
+                        <div class="metric-card-ong" style="border: 1px solid var(--laranja-eleva); background-color: #FFF7ED; box-shadow: none;">
+                            <div class="metric-icon" style="background-color: var(--laranja-eleva); color: white; display: flex; align-items: center; justify-content: center; font-size: 20px;"><i class="fa-solid fa-brazilian-real-sign"></i></div>
+                            <div class="metric-data"><h4 style="color: var(--laranja-eleva);">R$ 2.450</h4><p style="color: #9A3412;">Renda Gerada na Comunidade</p></div>
+                        </div>
+                        <div class="metric-card-ong" style="border: 1px solid #E2E8F0; box-shadow: none; background: #fff;">
+                            <div class="metric-icon" style="background-color: #F0FDF4; color: #16A34A; display: flex; align-items: center; justify-content: center; font-size: 20px;"><i class="fa-solid fa-star"></i></div>
+                            <div class="metric-data"><h4>15</h4><p>Avaliações Realizadas</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-dash" style="margin-bottom: 30px; border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <h3 style="color: var(--azul-institucional); margin-bottom: 20px; font-size: 18px;">Selos de Reputação</h3>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <div style="border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px 15px; display: flex; align-items: center; gap: 15px; width: 260px; background: #fff;">
+                            <div style="background: #E0F2FE; color: #0284C7; width: 45px; height: 45px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px;"><i class="fa-solid fa-handshake-angle"></i></div>
+                            <div><h4 style="margin: 0; font-size: 14px; color: var(--azul-institucional);">Primeira Contratação</h4><p style="margin: 3px 0 0; font-size: 12px; color: #64748B;">Apoiador inicial da rede</p></div>
+                        </div>
+                        <div style="border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px 15px; display: flex; align-items: center; gap: 15px; width: 260px; background: #fff;">
+                            <div style="background: #FEF9C3; color: #CA8A04; width: 45px; height: 45px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px;"><i class="fa-solid fa-scale-balanced"></i></div>
+                            <div><h4 style="margin: 0; font-size: 14px; color: var(--azul-institucional);">Avaliador Justo</h4><p style="margin: 3px 0 0; font-size: 12px; color: #64748B;">Feedback construtivo</p></div>
+                        </div>
+                        <div style="border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px 15px; display: flex; align-items: center; gap: 15px; width: 260px; background: #fff;">
+                            <div style="background: #FCE7F3; color: #DB2777; width: 45px; height: 45px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px;"><i class="fa-solid fa-rocket"></i></div>
+                            <div><h4 style="margin: 0; font-size: 14px; color: var(--azul-institucional);">Impulsionador Local</h4><p style="margin: 3px 0 0; font-size: 12px; color: #64748B;">Fomento à economia local</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: right; padding-top: 10px; border-top: 1px solid #E2E8F0;">
+                    <button onclick="abrirModalExclusao()" style="background: none; border: none; color: #94A3B8; font-size: 13px; cursor: pointer; transition: 0.2s; font-weight: 500;" onmouseover="this.style.color='#DC2626'" onmouseout="this.style.color='#94A3B8'">
+                        Desativar ou excluir minha conta
+                    </button>
+                </div>
+            </section>
+
+            <section id="acompanhar" class="dash-section">
+                <h2 style="color: var(--azul-institucional); margin-bottom: 20px;">Serviços em Andamento</h2>
+                <div id="container-servicos-cliente">
+                    <p style="color: var(--texto-cinza);">Buscando seus serviços ativos...</p>
+                </div>
+            </section>
+
+            <section id="historico" class="dash-section">
+                <div class="card-dash" style="border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <h2 style="color: var(--azul-institucional); margin-bottom: 20px;">Histórico e Avaliações</h2>
+                    <div id="container-historico-cliente">
+                        <p style="color: var(--texto-cinza);">Nenhum serviço finalizado no histórico.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pagamentos" class="dash-section">
+                <div class="card-dash">
+                    <h2>Pagamento Seguro (Escrow)</h2>
+                    <p style="color: var(--texto-cinza); margin-bottom: 20px;">O valor pago fica retido com a Eleva e só é repassado ao profissional após você confirmar a conclusão do serviço.</p>
+                    <div style="background-color: #F8FAFC; border: 1px dashed #CBD5E1; padding: 20px; border-radius: 8px; text-align: center;">
+                        <p style="color: #64748B; margin: 0;">Histórico financeiro em desenvolvimento.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="conflitos" class="dash-section">
+                <div class="card-dash">
+                    <h2 style="color: #DC2626;">Central de Resolução</h2>
+                    <p style="color: var(--texto-cinza); margin-bottom: 20px;">Teve algum problema com o serviço? Nossa equipe e as instituições parceiras estão aqui para mediar a situação e proteger seu dinheiro.</p>
+                    <button class="btn-chat-negociar" style="background-color: var(--branco); color: #DC2626; border: 1px solid #DC2626;">Abrir Nova Contestação</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="modal-exclusao">
+        <div class="modal-card">
+            <div style="color: #DC2626; font-size: 40px; margin-bottom: 10px;"><i class="fa-solid fa-circle-exclamation"></i></div>
+            <h3 style="color: #1E293B; margin-bottom: 10px;">Excluir Conta</h3>
+            <p style="color: #64748B; font-size: 14px; margin-bottom: 20px; line-height: 1.5;">Esta ação apagará <strong>definitivamente</strong> seus dados. Digite <strong>EXCLUIR</strong> abaixo.</p>
+            <input type="text" id="input-confirmar-exclusao" placeholder="Digite EXCLUIR" style="width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 6px; text-align: center; font-weight: 600; margin-bottom: 20px; outline: none; text-transform: uppercase;">
+            <div style="display: flex; gap: 10px;">
+                <button onclick="fecharModalExclusao()" style="flex: 1; padding: 12px; background: #F1F5F9; color: #475569; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Cancelar</button>
+                <button onclick="processarExclusao()" style="flex: 1; padding: 12px; background: #DC2626; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-avaliar">
+        <div class="modal-card">
+            <div style="color: #10B981; font-size: 40px; margin-bottom: 10px;"><i class="fa-solid fa-circle-check"></i></div>
+            <h3 style="color: #1E293B; margin-bottom: 5px;">Serviço Concluído!</h3>
+            <p style="color: #64748B; font-size: 14px; margin-bottom: 20px;">O pagamento seguro será liberado. Como foi sua experiência com o profissional?</p>
+            
+            <div class="star-rating" style="font-size: 32px; margin-bottom: 15px;" id="star-container">
+                <i class="fa-solid fa-star active" data-valor="1"></i>
+                <i class="fa-solid fa-star active" data-valor="2"></i>
+                <i class="fa-solid fa-star active" data-valor="3"></i>
+                <i class="fa-solid fa-star active" data-valor="4"></i>
+                <i class="fa-solid fa-star active" data-valor="5"></i>
+            </div>
+            
+            <textarea id="texto-avaliacao" placeholder="Ex: Excelente profissional, chegou no horário e resolveu o problema com rapidez!" style="width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-family: 'Inter'; font-size: 13px; color: #334155; resize: vertical; min-height: 80px; margin-bottom: 20px; outline: none;"></textarea>
+            
+            <div style="display: flex; gap: 10px;">
+                <button onclick="fecharModalAvaliar()" style="flex: 1; padding: 12px; background: #F1F5F9; color: #475569; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Cancelar</button>
+                <button onclick="processarConclusaoEAvaliacao()" style="flex: 1; padding: 12px; background: #10B981; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Liberar Pagamento</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://cahdiel.pythonanywhere.com/api';
+        let meuNome = localStorage.getItem('usuarioNome');
+        let solicitacaoAtual = null; // Guarda o ID do serviço que está sendo concluído
+        let notaAtual = 5; // Nota padrão nas estrelas
+
+        function fazerLogout() {
+            localStorage.removeItem('usuarioNome');
+            localStorage.removeItem('usuarioTipo');
+            window.location.href = 'entrar.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!meuNome) { window.location.href = 'entrar.html'; return; }
+            document.getElementById('nome-usuario-nav').textContent = `Olá, ${meuNome}`;
+            document.getElementById('nome-impacto').textContent = meuNome;
+            
+            const bioSalva = localStorage.getItem('bio_' + meuNome);
+            if (bioSalva) document.getElementById('bio-cliente').value = bioSalva;
+
+            // Carrega Foto de Perfil DIRETO DO BANCO DE DADOS
+            fetch(`${API_URL}/usuarios/foto/${meuNome}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.sucesso && data.foto) {
+                        document.getElementById('foto-preview').style.backgroundImage = `url(${data.foto})`;
+                        document.getElementById('icone-padrao').style.display = 'none';
+                    }
+                })
+                .catch(e => console.error("Erro ao carregar foto do servidor:", e));
+
+            carregarServicosCliente();
+
+            // Lógica das estrelas clicáveis no modal
+            const stars = document.querySelectorAll('#star-container i');
+            stars.forEach(star => {
+                star.addEventListener('click', (e) => {
+                    notaAtual = parseInt(e.target.getAttribute('data-valor'));
+                    stars.forEach(s => {
+                        if (parseInt(s.getAttribute('data-valor')) <= notaAtual) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+
+        // ==========================
+        // LÓGICA DOS MODAIS
+        // ==========================
+        function abrirModalAvaliar(id) {
+            solicitacaoAtual = id;
+            document.getElementById('texto-avaliacao').value = '';
+            document.getElementById('modal-avaliar').classList.add('active');
+        }
+
+        function fecharModalAvaliar() {
+            document.getElementById('modal-avaliar').classList.remove('active');
+            solicitacaoAtual = null;
+        }
+
+        function abrirModalExclusao() {
+            document.getElementById('input-confirmar-exclusao').value = '';
+            document.getElementById('modal-exclusao').classList.add('active');
+        }
+
+        function fecharModalExclusao() {
+            document.getElementById('modal-exclusao').classList.remove('active');
+        }
+
+        // ==========================
+        // FLUXO DE BANCO DE DADOS
+        // ==========================
+        async function processarConclusaoEAvaliacao() {
+            const comentario = document.getElementById('texto-avaliacao').value;
+            
+            try {
+                // Aqui enviamos também a NOTA e o COMENTÁRIO para o servidor
+                const response = await fetch(`${API_URL}/servico/concluir`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        solicitacao_id: solicitacaoAtual,
+                        nota: notaAtual,
+                        comentario: comentario
+                    })
+                });
+                
+                const data = await response.json();
+
+                if (data.sucesso) {
+                    fecharModalAvaliar();
+                    carregarServicosCliente(); // Recarrega a tela para mostrar no histórico
+                    showSection('historico', document.querySelectorAll('.nav-item')[2]); // Muda pra aba de histórico automático
+                }
+            } catch (e) { alert("Erro ao conectar com o servidor."); }
+        }
+
+        async function processarExclusao() {
+            const input = document.getElementById('input-confirmar-exclusao').value.trim().toUpperCase();
+            if (input !== 'EXCLUIR') { alert("Para confirmar, digite EXCLUIR."); return; }
+            try {
+                const response = await fetch(`${API_URL}/usuarios/deletar`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome: meuNome })
+                });
+                if (response.ok) { alert("Conta excluída."); fazerLogout(); }
+            } catch (e) { alert("Erro na conexão."); }
+        }
+
+        // ==========================
+        // LÓGICA DA FOTO DE PERFIL (AGORA NO BANCO DE DADOS)
+        // ==========================
+        async function alterarFoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Trava de segurança: impede fotos maiores que 2MB
+                if (file.size > 2 * 1024 * 1024) {
+                    alert("A imagem é muito grande! Por favor, escolha uma foto com menos de 2MB para não sobrecarregar o sistema.");
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const base64Image = e.target.result;
+                    
+                    // Mostra na tela instantaneamente
+                    document.getElementById('foto-preview').style.backgroundImage = `url(${base64Image})`;
+                    document.getElementById('icone-padrao').style.display = 'none';
+                    
+                    // Envia silenciosamente para o Banco de Dados
+                    try {
+                        await fetch(`${API_URL}/usuarios/foto`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ nome: meuNome, foto: base64Image })
+                        });
+                    } catch (error) {
+                        console.error("Erro ao salvar foto no servidor:", error);
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function salvarBio(event) {
+            const bioText = document.getElementById('bio-cliente').value;
+            localStorage.setItem('bio_' + meuNome, bioText);
+            const btn = event.currentTarget;
+            const textoOriginal = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check" style="margin-right: 5px;"></i> Salvo!';
+            btn.style.backgroundColor = '#10B981'; btn.style.borderColor = '#10B981'; btn.style.color = 'white';
+            setTimeout(() => { btn.innerHTML = textoOriginal; btn.style.backgroundColor = 'white'; btn.style.borderColor = 'var(--azul-institucional)'; btn.style.color = 'var(--azul-institucional)'; }, 2000);
+        }
+
+        function showSection(sectionId, element) {
+            document.querySelectorAll('.dash-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+            const sectionTarget = document.getElementById(sectionId);
+            if(sectionTarget) sectionTarget.classList.add('active');
+            if(element) element.classList.add('active');
+            if(sectionId === 'acompanhar' || sectionId === 'historico') carregarServicosCliente();
+        }
+
+        async function carregarServicosCliente() {
+            try {
+                const response = await fetch(`${API_URL}/solicitacoes/cliente/${meuNome}`);
+                const servicos = await response.json();
+                
+                const containerAtivos = document.getElementById('container-servicos-cliente');
+                const containerHistorico = document.getElementById('container-historico-cliente');
+                
+                const ativos = servicos.filter(s => s.status !== 'Concluído');
+                const concluidos = servicos.filter(s => s.status === 'Concluído');
+
+                if (ativos.length === 0) {
+                    containerAtivos.innerHTML = '<div style="background-color: #F8FAFC; border: 1px dashed #CBD5E1; padding: 30px; text-align: center; border-radius: 8px;"><p style="color: #64748B; margin: 0;">Você não possui serviços em andamento. Busque um profissional na aba "Explorar".</p></div>';
+                } else {
+                    containerAtivos.innerHTML = '';
+                    ativos.forEach(s => {
+                        let blocoDinamicoHtml = '';
+                        let salaId = `chat_${meuNome}_${s.profissional_nome}`.replace(/\s+/g, '_').toLowerCase();
+
+                        if (s.status === 'Pendente') {
+                            blocoDinamicoHtml = `
+                                <div style="margin-top: 15px;">
+                                    <a href="chat.html?sala=${salaId}&destinatario=${s.profissional_nome}" style="background-color: var(--azul-institucional); color: white; padding: 8px 16px; border-radius: 6px; font-weight: 600; text-decoration: none; display: inline-block; font-size: 13px;">💬 Abrir Chat de Negociação</a>
+                                </div>
+                            `;
+                        } else if (s.status === 'Pago (Retido)') {
+                            blocoDinamicoHtml = `
+                                <div style="margin-top: 15px; background-color: #FEF3C7; border: 1px solid #F59E0B; padding: 15px; border-radius: 8px; color: #B45309;">
+                                    <strong>🔒 Pagamento Retido em Segurança!</strong><br>
+                                    Quando o profissional chegar ao local, forneça o código abaixo para que ele inicie o trabalho:<br>
+                                    <span style="font-size: 22px; font-weight: 800; color: var(--azul-institucional); display: block; margin-top: 8px; letter-spacing: 2px;">🔑 CODE: ${s.codigo_verificacao}</span>
+                                </div>
+                            `;
+                        } else if (s.status === 'Em Andamento') {
+                            blocoDinamicoHtml = `
+                                <div style="margin-top: 15px; background-color: #F0FDF4; border: 1px solid #10B981; padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                                    <div>
+                                        <strong style="color: #15803D;">🛠️ Serviço em execução no local!</strong>
+                                        <p style="font-size: 13px; color: #166534; margin-top: 2px;">Assim que finalizar, clique ao lado para liberar o pagamento.</p>
+                                    </div>
+                                    <button onclick="abrirModalAvaliar(${s.id})" style="background-color: #10B981; color: white; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px;">✔️ Confirmar Conclusão</button>
+                                </div>
+                            `;
+                        }
+
+                        containerAtivos.innerHTML += `
+                            <div class="card-pedido">
+                                <div class="pedido-info">
+                                    <span class="status-badge" style="background-color: #E0F2FE; color: #0369A1; border: 1px solid #BAE6FD;">Status: ${s.status}</span>
+                                    <h4 style="margin-top: 10px;">Solicitação de Serviço</h4>
+                                    <p>Profissional: <strong>${s.profissional_nome}</strong></p>
+                                    <p style="font-size: 13px; color: #64748B;">Detalhes: ${s.detalhes}</p>
+                                </div>
+                                ${blocoDinamicoHtml}
+                            </div>
+                        `;
+                    });
+                }
+
+                if (concluidos.length === 0) {
+                    containerHistorico.innerHTML = '<p style="color: var(--texto-cinza);">Nenhum serviço finalizado no histórico.</p>';
+                } else {
+                    containerHistorico.innerHTML = '';
+                    concluidos.forEach(s => {
+                        let notaExibir = s.nota || 5; 
+                        let estrelasHtml = '';
+                        for(let i=0; i<5; i++) {
+                            estrelasHtml += i < notaExibir ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star" style="color: #CBD5E1;"></i>';
+                        }
+                        
+                        let comentarioTexto = s.comentario ? `"${s.comentario}"` : "Serviço concluído com sucesso e pagamento liberado.";
+
+                        containerHistorico.innerHTML += `
+                            <div class="card-pedido" style="box-shadow: none; padding: 15px; margin-top: 15px; border: 1px solid var(--borda); background-color: #fff;">
+                                <div class="pedido-info">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span class="status-badge" style="background-color: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0;">✔️ Concluído</span>
+                                        <div class="stars-display">${estrelasHtml}</div>
+                                    </div>
+                                    <h4 style="margin-top: 15px; font-size: 16px;">Serviço Finalizado</h4>
+                                    <p style="color: #475569; font-size: 14px;">Profissional: <strong style="color: var(--azul-institucional);">${s.profissional_nome}</strong></p>
+                                    
+                                    <div style="background-color: #F8FAFC; padding: 12px; border-radius: 6px; margin-top: 12px; border-left: 3px solid #F59E0B;">
+                                        <p style="font-size: 13px; color: #64748B; font-style: italic; margin: 0;">${comentarioTexto}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (e) { console.error("Erro ao carregar painel:", e); }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,2898 @@
+/* =========================================
+   VARIÁVEIS DE CORES OFICIAIS (ELEVA)
+   ========================================= */
+:root {
+    --laranja-primario: #F76408;
+    --laranja-hover: #e05a06;
+    --azul-institucional: #012046;
+    --azul-escuro: #001E44;
+    --branco: #ffffff;
+    --fundo-claro: #F8F9FA;
+    --fundo-creme: #FDFBF7; /* Cor de fundo suave da área de pesquisa */
+    --texto-cinza: #4A4A4A;
+    --borda: #EAEAEA;
+}
+
+/* Reseta o modelo de caixa para evitar que paddings estiquem as divs além de 100% */
+* {
+    box-sizing: border-box;
+}
+
+/* Trava a largura da página e esconde qualquer vazamento global */
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden; 
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================================
+   RESET E BASE
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: var(--branco);
+    color: var(--texto-cinza);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* =========================================
+   NAVBAR (CABEÇALHO)
+   ========================================= */
+header {
+    background-color: var(--branco);
+    border-bottom: 1px solid var(--borda);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-container img {
+    height: 80px; /* Ajuste conforme o tamanho do seu ficheiro logo-completo.png */
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--azul-institucional);
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--laranja-primario);
+}
+
+.btn-entrar {
+    background-color: transparent;
+    color: var(--azul-institucional);
+    border: 1px solid var(--azul-institucional);
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-entrar:hover {
+    background-color: var(--azul-institucional);
+    color: var(--branco);
+}
+
+/* =========================================
+   HERO SECTION (ÁREA DE PESQUISA)
+   ========================================= */
+.hero {
+    background-color: var(--fundo-creme);
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    color: var(--azul-institucional);
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: var(--texto-cinza);
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+.search-container {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    background: var(--branco);
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid var(--borda);
+}
+
+.search-container input {
+    flex: 1;
+    border: none;
+    padding: 15px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    outline: none;
+}
+
+.btn-pesquisar {
+    background-color: var(--laranja-primario);
+    color: var(--branco);
+    border: none;
+    padding: 0 30px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-pesquisar:hover {
+    background-color: var(--laranja-hover);
+}
+
+
+/* =========================================
+   SERVIÇOS POPULARES
+   ========================================= */
+.servicos-populares {
+    padding: 60px 5%;
+    background-color: var(--branco);
+}
+
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.servicos-populares h2 {
+    color: var(--azul-institucional);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.service-card {
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    
+    /* ANIMAÇÃO SUAVE (Inspirada no Triider) */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito ao passar o mouse */
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
+}
+
+.service-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.service-info {
+    padding: 20px;
+}
+
+.service-info span {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--azul-institucional);
+    margin-bottom: 8px;
+}
+
+.service-info p {
+    font-size: 13px;
+    color: var(--texto-cinza);
+    line-height: 1.4;
+}
+
+/* =========================================
+   BANNER DE IMPACTO (ESTILO CARLA)
+   ========================================= */
+.impacto-banner {
+    background-color: #536271; /* Cinza azulado escuro fiel à Carla */
+    padding: 60px 5%;
+    color: var(--branco);
+}
+
+.impacto-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.impacto-texto {
+    flex: 1;
+}
+
+.impacto-texto h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.impacto-texto p {
+    font-size: 16px;
+    color: #E2E8F0;
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+.btn-impacto {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--branco);
+    border: 2px solid var(--branco);
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-impacto:hover {
+    background-color: var(--branco);
+    color: #536271;
+}
+
+.impacto-imagem {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.impacto-imagem img {
+    width: 100%;
+    max-width: 450px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* =========================================
+   RODAPÉ (FOOTER)
+   ========================================= */
+footer {
+    background-color: var(--azul-escuro);
+    color: #94A3B8;
+    padding: 30px 5%;
+    text-align: center;
+    font-size: 14px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-container p:first-child {
+    color: var(--branco);
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+/* Responsividade Básica para Celular */
+@media (max-width: 768px) {
+    .impacto-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .impacto-imagem {
+        justify-content: center;
+    }
+    .impacto-texto p {
+        margin: 0 auto 30px auto;
+    }
+}
+
+/* =========================================
+   PÁGINA DE PESQUISA / LISTAGEM
+   ========================================= */
+.contexto-pesquisa {
+    background-color: var(--fundo-claro);
+    padding: 40px 5%;
+    border-bottom: 1px solid var(--borda);
+}
+
+.contexto-pesquisa h2 {
+    color: var(--azul-institucional);
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.text-laranja {
+    color: var(--laranja-primario);
+}
+
+.lista-profissionais {
+    padding: 40px 5%;
+    background-color: var(--branco);
+}
+
+.cards-coluna {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Estrutura do Card Horizontal (Triider Style) */
+.professional-card {
+    display: flex;
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 25px;
+    gap: 25px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    align-items: center;
+}
+
+.professional-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    border-color: #cbd5e1;
+}
+
+/* Foto com borda arredondada de avatar */
+.card-foto img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #E2E8F0;
+}
+
+.card-detalhes {
+    flex: 1;
+}
+
+.nome-linha {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.nome-linha h3 {
+    color: var(--azul-institucional);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Selo de validação institucional estilo LinkedIn */
+.badge-validado {
+    background-color: #E0F2FE;
+    color: #0369A1;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 50px;
+    border: 1px solid #BAE6FD;
+}
+
+.profissao {
+    font-size: 15px;
+    color: var(--texto-cinza);
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.localidade {
+    color: #64748B;
+    font-weight: 400;
+}
+
+.card-metricas {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.rating {
+    color: #F59E0B;
+    font-weight: 600;
+}
+
+.servicos-contados {
+    color: #012046;
+    font-weight: 500;
+}
+
+.separador {
+    color: #CBD5E1;
+}
+
+.recente-review {
+    font-size: 14px;
+    color: #64748B;
+    font-style: italic;
+    background-color: #F8FAFC;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-left: 3px solid #012046;
+}
+
+/* Bloco de Ação à direita */
+.card-acao {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 15px;
+    min-width: 200px;
+    border-left: 1px solid var(--borda);
+    padding-left: 25px;
+}
+
+.preco-tag {
+    text-align: right;
+}
+
+.label-preco {
+    display: block;
+    font-size: 12px;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.valor-preco {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--azul-institucional);
+}
+
+.btn-ver-perfil {
+    background-color: var(--laranja-primario);
+    color: var(--branco);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+.btn-ver-perfil:hover {
+    background-color: var(--laranja-hover);
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .professional-card {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    .nome-linha {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .card-acao {
+        border-left: none;
+        padding-left: 0;
+        width: 100%;
+        align-items: center;
+        border-top: 1px solid var(--borda);
+        padding-top: 20px;
+    }
+    .preco-tag {
+        text-align: center;
+    }
+}
+
+/* =========================================
+   PÁGINA DE PERFIL DETALHADO (TEMPLATE)
+   ========================================= */
+.breadcrumbs {
+    padding: 20px 0;
+    font-size: 14px;
+    color: #64748B;
+}
+.breadcrumbs a { color: var(--azul-institucional); }
+.breadcrumbs .atual { color: var(--laranja-primario); font-weight: 600; }
+
+.perfil-principal {
+    background-color: var(--branco);
+    padding-bottom: 60px;
+}
+
+.perfil-topo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+/* Bloco da esquerda: Foto e Infos básicas */
+.topo-esquerda {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+/* =========================================
+   PERFIL: FOTO CIRCULAR E SELO LINKEDIN
+   ========================================= */
+.foto-bloco {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+}
+
+.foto-bloco img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%; /* Deixa a foto perfeitamente redonda */
+    object-fit: cover;
+    border: 4px solid #E2E8F0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.linkedin-badge {
+    position: absolute;
+    bottom: 35px;
+    right: 5px;
+    background-color: #0A66C2; /* Azul oficial do LinkedIn */
+    color: var(--branco);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border: 3px solid var(--branco);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.tag-disponivel {
+    background-color: #DCFCE7;
+    color: #15803D;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.tag-disponivel {
+    background-color: #DCFCE7;
+    color: #15803D;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.nome-verificado {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.nome-verificado h2 { font-size: 28px; color: var(--azul-institucional); font-weight: 700; }
+.selo-verificado { background-color: #0284C7; color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+
+.sub-profissao { font-size: 18px; color: var(--texto-cinza); font-weight: 500; margin-top: 2px; }
+.regiao-txt { font-size: 15px; color: #64748B; margin-bottom: 15px; }
+
+.badge-ong-perfil {
+    background-color: #EFF6FF;
+    color: #1D4ED8;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #BFDBFE;
+}
+
+.mini-stats { display: flex; gap: 15px; font-size: 14px; color: #475569; margin-top: 20px; font-weight: 500; }
+
+/* Bloco da Direita: Caixas de métricas de performance */
+.topo-direita h3 { color: var(--azul-institucional); font-size: 18px; margin-bottom: 15px; }
+
+.widgets-desempenho-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.widget-card {
+    background-color: #F8FAFC;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.widget-header { font-size: 18px; color: var(--azul-institucional); margin-bottom: 4px; }
+.widget-card p { font-size: 12px; color: var(--texto-cinza); font-weight: 500; margin-bottom: 8px; line-height: 1.2; }
+.meta-txt { font-size: 11px; color: #64748B; display: block; }
+
+.barra-progresso { background-color: #E2E8F0; border-radius: 50px; height: 6px; margin-bottom: 5px; overflow: hidden; }
+.progresso-fill { background-color: var(--azul-institucional); height: 100%; }
+
+/* Botões de Ação */
+.botoes-acao-linha {
+    display: flex;
+    gap: 15px;
+    padding: 20px 0;
+    border-top: 1px solid var(--borda);
+    border-bottom: 1px solid var(--borda);
+    margin-bottom: 40px;
+}
+
+.btn-contratar-agora { background-color: var(--laranja-primario); color: white; border: none; padding: 14px 35px; border-radius: 8px; font-weight: 700; font-size: 16px; cursor: pointer; transition: background 0.2s; }
+.btn-contratar-agora:hover { background-color: var(--laranja-hover); }
+
+.btn-sec-perfil { background-color: #F1F5F9; color: var(--azul-institucional); border: 1px solid #CBD5E1; padding: 14px 25px; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; }
+.btn-sec-perfil:hover { background-color: #E2E8F0; }
+
+/* Grid de Detalhes Separado por colunas */
+.perfil-detalhes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.detalhe-coluna h3 { color: var(--azul-institucional); font-size: 18px; border-bottom: 2px solid var(--borda); padding-bottom: 8px; margin-bottom: 15px; }
+.sobre-texto { font-size: 14px; color: var(--texto-cinza); text-align: justify; margin-bottom: 20px; }
+.mini-tags-pessoais p { font-size: 13px; color: #475569; margin-bottom: 5px; }
+
+.tags-habilidades { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags-habilidades span { background-color: #F1F5F9; color: #334155; font-size: 13px; padding: 6px 12px; border-radius: 6px; font-weight: 500; border: 1px solid #E2E8F0; }
+
+.lista-check, .lista-precos { list-style: none; }
+.lista-check li { font-size: 14px; margin-bottom: 8px; color: #334155; }
+.regioes-lista { font-size: 15px; color: var(--texto-cinza); }
+.lista-precos li { font-size: 14px; margin-bottom: 10px; color: #334155; }
+
+/* Caixa de Avaliações */
+.avaliacoes-secao h3 { color: var(--azul-institucional); font-size: 20px; margin-bottom: 20px; }
+.avaliacoes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.review-box { border: 1px solid var(--borda); border-radius: 10px; padding: 20px; background-color: #F8FAFC; }
+.estrelas { color: #F59E0B; margin-bottom: 8px; }
+.text-review { font-size: 14px; color: var(--texto-cinza); font-style: italic; margin-bottom: 12px; }
+.autor-review { font-size: 13px; color: var(--azul-institucional); display: block; }
+
+/* Responsividade Geral do Perfil */
+@media (max-width: 900px) {
+    .perfil-topo-grid, .perfil-detalhes-grid, .avaliacoes-grid { grid-template-columns: 1fr; gap: 30px; }
+    .topo-esquerda { flex-direction: column; align-items: center; text-align: center; }
+    .nome-verificado { justify-content: center; }
+    .mini-stats { justify-content: center; }
+    .botoes-acao-linha { flex-wrap: wrap; justify-content: center; }
+    .btn-contratar-agora, .btn-sec-perfil { width: 100%; }
+}
+
+/* =========================================
+   PÁGINA DE FORMULÁRIO DE CONTRATAÇÃO
+   ========================================= */
+.contratacao-container {
+    padding-top: 40px;
+    padding-bottom: 60px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--fundo-claro);
+}
+
+.form-box {
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.form-box h2 {
+    color: var(--azul-institucional);
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.sub-form {
+    font-size: 15px;
+    color: var(--texto-cinza);
+    margin-bottom: 25px;
+}
+
+/* Bloco informativo de Escrow */
+.alerta-escrow {
+    background-color: #FFF3ED;
+    border-left: 4px solid var(--laranja-primario);
+    color: var(--azul-institucional);
+    padding: 15px 20px;
+    border-radius: 4px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+/* Componentes do Formulário */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.form-group-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--azul-institucional);
+}
+
+.form-group input, .form-group textarea {
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 15px;
+    outline: none;
+    color: var(--texto-cinza);
+    background-color: #FFF;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    border-color: var(--azul-institucional);
+    box-shadow: 0 0 0 3px rgba(1, 32, 70, 0.05);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Botão Submit */
+.btn-enviar-solicitacao {
+    background-color: var(--laranja-primario);
+    color: var(--branco);
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    box-shadow: 0 4px 10px rgba(247, 100, 8, 0.2);
+    transition: background-color 0.2s;
+}
+
+.btn-enviar-solicitacao:hover {
+    background-color: var(--laranja-hover);
+}
+
+/* Ajuste de responsividade */
+@media (max-width: 600px) {
+    .form-group-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .form-box {
+        padding: 25px;
+    }
+}
+
+/* =========================================
+   PÁGINA DO PAINEL DA ONG (DASHBOARD)
+   ========================================= */
+.dashboard-container {
+    padding-top: 40px;
+    padding-bottom: 60px;
+    max-width: 1000px !important;
+}
+
+.ong-profile-card {
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+}
+
+.ong-avatar-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.ong-icon-placeholder {
+    background: #FFF3ED;
+    border: 2px solid var(--laranja-primario);
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.ong-nome-dados h2 {
+    color: var(--azul-institucional);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.badge-tipo-instituicao {
+    background-color: #FFF3ED;
+    color: var(--laranja-primario);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-top: 3px;
+    border: 1px solid #FFE4D6;
+}
+
+.ong-meta { font-size: 14px; color: #64748B; margin-top: 8px; }
+
+.ong-sobre-box {
+    border-top: 1px solid var(--borda);
+    padding-top: 15px;
+    font-size: 14px;
+}
+.ong-sobre-box strong { color: var(--azul-institucional); display: block; margin-bottom: 4px; }
+.ong-sobre-box p { color: var(--texto-cinza); text-align: justify; line-height: 1.5; }
+
+/* Grid de métricas de impacto */
+.dashboard-secao { margin-bottom: 40px; }
+.dashboard-secao h3 { color: var(--azul-institucional); font-size: 18px; font-weight: 700; margin-bottom: 20px; border-bottom: 2px solid var(--borda); padding-bottom: 6px; }
+
+.metrics-grid-ong {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.metric-card-ong {
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.metric-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+/* Cores pastéis de fundo para os ícones como no app */
+.bg-light-orange { background-color: #FFF3ED; color: var(--laranja-primario); }
+.bg-light-green { background-color: #DCFCE7; color: #16803D; }
+.bg-light-blue { background-color: #E0F2FE; color: #0369A1; }
+.bg-light-purple { background-color: #F3E8FF; color: #6B21A8; }
+
+.metric-data h4 { font-size: 22px; color: var(--azul-institucional); font-weight: 700; line-height: 1.1; }
+.metric-data p { font-size: 12px; color: #64748B; font-weight: 500; margin-top: 2px; }
+.text-destaque-renda h4 { color: #6B21A8; }
+
+/* Listagem de Ações Institucionais horizontais */
+.acoes-grid-ong {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.acao-row {
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 18px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.acao-row:hover {
+    background-color: #F8FAFC;
+    border-color: #CBD5E1;
+    transform: translateX(3px);
+}
+
+.acao-left { display: flex; align-items: center; gap: 15px; }
+.acao-icon { font-size: 20px; }
+.acao-label { font-size: 15px; font-weight: 600; color: var(--azul-institucional); }
+.seta-link { color: #94A3B8; font-size: 12px; }
+
+/* Responsividade do Painel */
+@media (max-width: 850px) {
+    .metrics-grid-ong { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+    .metrics-grid-ong { grid-template-columns: 1fr; }
+    .ong-avatar-info { flex-direction: column; text-align: center; }
+}
+
+
+/* =========================================
+   PÁGINA SOBRE NÓS / NOSSO IMPACTO
+   ========================================= */
+
+/* Hero Section da página Sobre */
+.sobre-hero {
+    background-color: var(--azul-institucional);
+    color: var(--branco);
+    padding: 80px 5%;
+    text-align: center;
+}
+
+.tag-propósito {
+    display: inline-block;
+    background-color: rgba(247, 100, 8, 0.15);
+    color: var(--laranja-primario);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border: 1px solid rgba(247, 100, 8, 0.3);
+}
+
+.sobre-hero h1 {
+    font-size: 36px;
+    font-weight: 700;
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+    line-height: 1.2;
+}
+
+.sub-manifesto {
+    font-size: 18px;
+    font-style: italic;
+    color: #93C5FD;
+    font-weight: 500;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Estrutura de Grid para a História e Dados */
+.sobre-historia {
+    padding: 60px 5%;
+    background-color: var(--branco);
+}
+
+.grid-sobre {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.historia-texto h2 {
+    color: var(--azul-institucional);
+    font-size: 26px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.historia-texto p {
+    font-size: 15px;
+    color: var(--texto-cinza);
+    margin-bottom: 18px;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+/* Box Lateral de Estatísticas de Brasília */
+.historia-dados {
+    background-color: var(--fundo-claro);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+}
+
+.historia-dados h3 {
+    color: var(--azul-institucional);
+    font-size: 18px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.card-dado {
+    border-bottom: 1px solid var(--borda);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.card-dado:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.card-dado h4 {
+    font-size: 32px;
+    color: var(--laranja-primario);
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.card-dado p {
+    font-size: 13px;
+    color: #475569;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* Seção da Arquitetura das 5 Camadas */
+.sobre-arquitetura {
+    padding: 60px 5%;
+    background-color: var(--fundo-claro);
+    border-top: 1px solid var(--borda);
+}
+
+.titulo-arquitetura {
+    text-align: center;
+    color: var(--azul-institucional);
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.sub-arquitetura {
+    text-align: center;
+    font-size: 15px;
+    color: var(--texto-cinza);
+    max-width: 700px;
+    margin: 0 auto 45px auto;
+}
+
+.linha-tempo-pilares {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+/* Cards das camadas com efeito hover sutil */
+.pilar-box {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-left: 6px solid var(--azul-institucional);
+    border-radius: 8px;
+    padding: 22px 28px;
+    transition: all 0.25s ease;
+}
+
+.pilar-box:hover {
+    transform: translateX(5px);
+    border-left-color: var(--laranja-primario);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.pilar-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 8px;
+}
+
+.num-pilar {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--azul-institucional);
+    opacity: 0.25;
+    transition: color 0.25s ease, opacity 0.25s ease;
+}
+
+.pilar-box:hover .num-pilar {
+    color: var(--laranja-primario);
+    opacity: 0.85;
+}
+
+.pilar-header h3 {
+    color: var(--azul-institucional);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.pilar-box p {
+    font-size: 14px;
+    color: var(--texto-cinza);
+    line-height: 1.5;
+    text-align: justify;
+}
+
+/* Link Ativo na Navbar */
+.active-link {
+    color: var(--laranja-primario) !important;
+    font-weight: 700 !important;
+}
+
+/* Responsividade da página Sobre */
+@media (max-width: 768px) {
+    .grid-sobre {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .sobre-hero h1 {
+        font-size: 28px;
+    }
+    .pilar-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .pilar-box p {
+        text-align: center;
+    }
+}
+
+/* =========================================
+   NOVO ARRANJO VISUAL DA HOME (DIRETRIZES CARLA)
+   ========================================= */
+.hero-split {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 60px 5%;
+    background-color: var(--branco);
+}
+
+.hero-content-left {
+    flex: 1.1;
+    text-align: left;
+}
+
+.hero-content-left h1 {
+    color: var(--azul-institucional);
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 15px;
+}
+
+.hero-content-left p {
+    color: var(--texto-cinza);
+    font-size: 16px;
+    margin-bottom: 35px;
+    line-height: 1.5;
+}
+
+.hero-image-right {
+    flex: 0.9;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-image-right img {
+    width: 100%;
+    max-width: 480px;
+    height: 360px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(1, 30, 68, 0.08);
+}
+
+/* Nova barra de busca horizontal curta */
+.search-container-new {
+    display: flex;
+    background: var(--branco);
+    border-radius: 8px;
+    padding: 4px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid var(--borda);
+    max-width: 480px;
+}
+
+.search-container-new input {
+    flex: 1;
+    border: none;
+    padding: 14px 16px;
+    font-size: 15px;
+    outline: none;
+}
+
+.btn-pesquisar-new {
+    background-color: var(--laranja-primario);
+    color: var(--branco);
+    border: none;
+    padding: 0 25px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-pesquisar-new:hover {
+    background-color: var(--laranja-hover);
+}
+
+/* Seção de Diferenciais (Três Cards) */
+.diferenciais-section {
+    background-color: var(--fundo-claro);
+    padding: 50px 5%;
+    border-top: 1px solid var(--borda);
+    border-bottom: 1px solid var(--borda);
+}
+
+.diferenciais-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.diferencial-card {
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.01);
+}
+
+.diferencial-icon {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.diferencial-card h3 {
+    color: var(--azul-institucional);
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.diferencial-card p {
+    color: var(--texto-cinza);
+    font-size: 13.5px;
+    line-height: 1.4;
+}
+
+/* Seção Profissionais em Destaque */
+.destaque-section {
+    padding: 60px 5%;
+    background-color: var(--branco);
+}
+
+.destaque-section h2 {
+    color: var(--azul-institucional);
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.destaque-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.destaque-card {
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 16px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.destaque-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+    border-color: #CBD5E1;
+}
+
+.destaque-img-box img {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #E2E8F0;
+    margin-bottom: 15px;
+}
+
+.destaque-info h3 {
+    color: var(--azul-institucional);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.destaque-vaga {
+    font-size: 14px;
+    color: var(--texto-cinza);
+    font-weight: 500;
+}
+
+.destaque-regiao {
+    font-size: 13px;
+    color: #64748B;
+    margin-bottom: 12px;
+}
+
+.badge-validado-mini {
+    background-color: #E0F2FE;
+    color: #0369A1;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 50px;
+    border: 1px solid #BAE6FD;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.destaque-nota {
+    color: #F59E0B;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.btn-ver-perfil-destaque {
+    background-color: var(--laranja-primario);
+    color: var(--branco);
+    border: none;
+    padding: 11px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.btn-ver-perfil-destaque:hover {
+    background-color: var(--laranja-hover);
+}
+
+/* Responsividade */
+@media (max-width: 850px) {
+    .hero-split, .diferenciais-grid, .destaque-grid {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-content-left { text-align: center; }
+    .search-container-new { margin: 0 auto; }
+    .hero-image-right { justify-content: center; }
+}
+
+/* =========================================
+   PÁGINA DE AUTENTICAÇÃO (ENTRAR / CADASTRAR)
+   ========================================= */
+.login-main-container {
+    background-color: var(--fundo-claro);
+    padding: 40px 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 140px);
+}
+
+.auth-wrapper {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Nova Logo externa e normal */
+.auth-logo-header {
+    margin-bottom: 25px;
+}
+
+.auth-logo-header img {
+    height: 80px; /* Tamanho amigável e elegante */
+    object-fit: contain;
+}
+
+.auth-card {
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 12px; /* Ligeiramente mais moderno */
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(1, 30, 68, 0.05);
+}
+
+.auth-tabs {
+    display: flex;
+    background-color: #F8FAFC; /* Cor de fundo mais suave */
+    border-bottom: 1px solid var(--borda);
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748B;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.auth-tab.active {
+    background-color: var(--branco);
+    color: var(--azul-institucional);
+    border-bottom: 3px solid var(--laranja-primario);
+}
+
+.auth-form {
+    display: none;
+    padding: 30px; /* Reduzido de 40px para 30px para evitar scroll */
+}
+
+.auth-form.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.auth-form h2 {
+    color: var(--azul-institucional);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.auth-sub {
+    font-size: 13px;
+    color: var(--texto-cinza);
+    margin-bottom: 20px;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* Campos de Input mais compactos */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 15px; /* Reduzido de 20px para poupar espaço */
+}
+
+/* Linha compacta para o cadastro (WhatsApp e Senha lado a lado) */
+.form-group-row-compact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/*nova mudança lembrar de mostrar para Carla*/
+/* Adiciona a Media Query para telas de até 768px (smartphones e tablets pequenos) */
+@media (max-width: 768px) {
+    .form-group-row-compact {
+        grid-template-columns: 1fr; /* Muda para apenas 1 coluna */
+        /* Opcional: você pode reduzir o gap em telas menores se achar necessário */
+        gap: 10px; 
+    }
+}
+/*nova mudança lembrar de mostrar para Carla fim*/
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--azul-institucional);
+}
+
+.form-group input,
+.form-group select {
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+    padding: 10px 14px; /* Padding menor */
+    font-size: 14px;
+    outline: none;
+    color: var(--texto-cinza);
+    background-color: #FFF;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--azul-institucional);
+}
+
+.form-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+.btn-auth-action {
+    background-color: var(--laranja-primario);
+    color: var(--branco);
+    border: none;
+    padding: 12px; /* Reduzido de 14px */
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 5px;
+    transition: background-color 0.2s;
+    box-shadow: 0 4px 10px rgba(247, 100, 8, 0.15);
+}
+
+.btn-auth-action:hover {
+    background-color: var(--laranja-hover);
+}
+
+/* ELEMENTOS DE LOGIN SOCIAL E DIVISORES */
+.social-login-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.btn-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 10px; /* Mais compacto */
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-facebook {
+    background-color: #1877F2;
+    color: var(--branco);
+    border: none;
+}
+
+.btn-facebook:hover {
+    background-color: #166FE5;
+}
+
+.btn-google {
+    background-color: var(--branco);
+    color: var(--texto-cinza);
+    border: 1px solid #CBD5E1;
+}
+
+.btn-google:hover {
+    background-color: #F8FAFC;
+    border-color: #94A3B8;
+}
+
+.auth-divisor {
+    text-align: center;
+    position: relative;
+    margin: 15px 0; /* Menos margem */
+}
+
+.auth-divisor::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background-color: var(--borda);
+    z-index: 1;
+}
+
+.auth-divisor span {
+    background-color: var(--branco);
+    padding: 0 10px;
+    color: #64748B;
+    font-size: 12px;
+    position: relative;
+    z-index: 2;
+    font-weight: 500;
+}
+
+/* =========================================
+   ELEMENTOS DE LOGIN SOCIAL E DIVISORES
+   ========================================= */
+.social-login-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.btn-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-facebook {
+    background-color: #1877F2;
+    color: var(--branco);
+    border: none;
+}
+
+.btn-facebook:hover {
+    background-color: #166FE5;
+    transform: translateY(-1px);
+}
+
+.btn-google {
+    background-color: var(--branco);
+    color: var(--texto-cinza);
+    border: 1px solid #CBD5E1;
+}
+
+.btn-google:hover {
+    background-color: #F8FAFC;
+    border-color: #94A3B8;
+    transform: translateY(-1px);
+}
+
+.social-icon {
+    font-size: 18px;
+}
+
+/* Divisória "ou use seu e-mail" */
+.auth-divisor {
+    text-align: center;
+    position: relative;
+    margin: 25px 0;
+}
+
+.auth-divisor::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background-color: var(--borda);
+    z-index: 1;
+}
+
+.auth-divisor span {
+    background-color: var(--branco);
+    padding: 0 15px;
+    color: #64748B;
+    font-size: 13px;
+    position: relative;
+    z-index: 2;
+    font-weight: 500;
+}
+
+
+
+/* =========================================
+   SEÇÃO DE CATEGORIAS RESPONSIVA (LAPIDAÇÃO)
+   ========================================= */
+.categorias-section {
+    padding: 40px 5%;
+    background-color: var(--branco);
+}
+
+.categorias-section h2 {
+    color: var(--azul-institucional);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* COMPORTAMENTO PADRÃO: DESKTOP (Exibe todos os cards à vista sem quebrar o layout) */
+.categorias-wrapper {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 16px;
+    padding-bottom: 5px;
+}
+
+/* Card individual da Categoria */
+.categoria-item {
+    flex: 1 1 120px; 
+    min-width: 120px;
+    max-width: 135px;
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.categoria-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(247, 100, 8, 0.08);
+    border-color: var(--laranja-primario);
+}
+
+.categoria-icon-box {
+    font-size: 24px;
+    color: var(--laranja-primario);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+}
+
+.categoria-item span {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--azul-institucional);
+    line-height: 1.3;
+}
+/* COMPORTAMENTO SMARTPHONE: CARROSSEL modificado*/
+@media (max-width: 768px) {
+    .categorias-section {
+        padding: 40px 0; /* Removemos o padding lateral da seção */
+        width: 100%;
+    }
+
+    .categorias-section h2 {
+        text-align: left;
+        font-size: 18px;
+        padding: 0 20px; /* Mantém apenas o título alinhado */
+    }
+
+    .categorias-wrapper {
+        display: flex;
+        flex-wrap: nowrap !important; /* !important PROÍBE que os cards desçam para a 2ª linha */
+        gap: 15px;
+        
+        overflow-x: auto; 
+        padding: 10px 20px 20px 20px; /* Dá espaço para os itens e para a sombra não ser cortada */
+        
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch; /* Fluidez no iPhone */
+        scroll-snap-type: x mandatory; /* Efeito ímã */
+        
+        scrollbar-width: none;  
+        -ms-overflow-style: none;  
+    }
+
+    .categorias-wrapper::-webkit-scrollbar {
+        display: none; 
+    }
+
+    .categoria-item {
+        /* !important garante que o card terá exatos 115px, sem encolher, permitindo ver os 11 itens */
+        flex: 0 0 115px !important; 
+        width: 115px; 
+        min-width: unset;
+        max-width: unset;
+        
+        scroll-snap-align: start; /* Instrui onde o ímã deve parar */
+        margin: 0; 
+    }
+}
+/* =========================================
+   ESTILOS DO AVATAR DO SOL NA TELA DE LOGIN
+   ========================================= */
+.auth-avatar-header {
+    display: flex;
+    justify-content: center;
+    padding-top: 35px;
+    background-color: var(--branco);
+}
+
+.auth-sun-avatar {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    background-color: #FFF3ED;
+    border-radius: 50%;
+    padding: 10px;
+    border: 2px solid var(--laranja-primario);
+    box-shadow: 0 4px 10px rgba(247, 100, 8, 0.08);
+}
+
+/* Correção de compatibilidade global para Links que agem como botões */
+a.btn-entrar, a.btn-pesquisar-new, a.btn-ver-perfil-destaque, a.btn-ver-perfil, a.btn-contratar-agora, a.btn-social, .categoria-item {
+    text-decoration: none !important;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+}
+a.btn-ver-perfil-destaque, a.btn-ver-perfil {
+    width: 100%;
+}
+
+/* CORREÇÃO DEFINTIVA DO FOOTER (STICKY FOOTER FLEXBOX) */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Força o container principal a ocupar o espaço disponível e empurrar o footer */
+main, section, .login-main-container, .contratacao-container, .lista-profissionais {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
+/* Correção de compatibilidade para tags de links que agem como botões */
+a.btn-entrar, a.btn-pesquisar-new, a.btn-ver-perfil-destaque, a.btn-ver-perfil, a.btn-contratar-agora, a.btn-social, .categoria-item {
+    text-decoration: none !important;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+}
+a.btn-ver-perfil-destaque, a.btn-ver-perfil {
+    width: 100%;
+}
+
+/* =========================================
+   INTERFACE DO CHAT SIMULADO (NEGOCIAÇÃO)
+   ========================================= */
+.chat-container {
+    max-width: 750px;
+    margin: 40px auto;
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.chat-header {
+    background: var(--azul-institucional);
+    color: var(--branco);
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.chat-header img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--branco);
+}
+
+.chat-header-info h3 {
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.chat-header-info span {
+    font-size: 12px;
+    color: #93C5FD;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 25px;
+    background-color: #F0F2F5; /* Cor estilo WhatsApp */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.msg-bubble {
+    max-width: 75%;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.msg-received {
+    background: var(--branco);
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+    color: var(--texto-cinza);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.msg-sent {
+    background: #DCF8C6; /* Verde suave de envio */
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+    color: #064E3B;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.chat-input-area {
+    padding: 15px 20px;
+    background: var(--branco);
+    border-top: 1px solid var(--borda);
+    display: flex;
+    gap: 12px;
+}
+
+.chat-input-area input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 1px solid var(--borda);
+    border-radius: 50px;
+    outline: none;
+    font-size: 15px;
+    background-color: #F8FAFC;
+}
+
+.chat-input-area button {
+    background: var(--laranja-primario);
+    color: white;
+    border: none;
+    padding: 0 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.chat-input-area button:hover {
+    background: var(--laranja-hover);
+}
+
+/* =========================================
+   PAINEL DO PROFISSIONAL (DASHBOARD)
+   ========================================= */
+
+/* Layout Principal do Dashboard */
+.layout-painel { 
+    display: flex; 
+    height: calc(100vh - 73px); /* Altura da tela menos o cabeçalho */
+    background-color: var(--fundo-claro); 
+    overflow: hidden; 
+}
+
+/* Menu Lateral */
+.dash-sidebar { 
+    width: 260px; 
+    background-color: var(--branco); 
+    border-right: 1px solid var(--borda); 
+    overflow-y: auto; 
+    padding: 20px 0; 
+}
+
+.nav-category { 
+    font-size: 12px; 
+    text-transform: uppercase; 
+    color: #94A3B8; 
+    margin: 20px 25px 10px; 
+    font-weight: 700; 
+    letter-spacing: 0.5px; 
+}
+
+.nav-item { 
+    display: block; 
+    padding: 12px 25px; 
+    color: var(--texto-cinza); 
+    text-decoration: none; 
+    font-weight: 500; 
+    transition: all 0.2s; 
+    border-left: 4px solid transparent; 
+}
+
+.nav-item:hover { 
+    background-color: rgba(1, 32, 70, 0.03); 
+    color: var(--azul-institucional); 
+}
+
+.nav-item.active { 
+    background-color: rgba(1, 32, 70, 0.05); 
+    color: var(--azul-institucional); 
+    border-left-color: var(--laranja-primario); 
+    font-weight: 600;
+}
+
+/* Área Central do Painel */
+.dash-main { 
+    flex: 1; 
+    padding: 30px 40px; 
+    overflow-y: auto; 
+}
+
+.dash-section { 
+    display: none; 
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.dash-section.active { 
+    display: block; 
+}
+
+/* Cabeçalho Interno do Perfil */
+.perfil-header { 
+    background-color: var(--branco); 
+    padding: 30px; 
+    border-radius: 12px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    border: 1px solid var(--borda);
+    margin-bottom: 20px; 
+}
+
+.perfil-info-basic { 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+}
+
+.foto-perfil { 
+    width: 90px; 
+    height: 90px; 
+    border-radius: 50%; 
+    background-color: var(--fundo-claro); 
+    border: 3px solid var(--borda);
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 35px; 
+    overflow: hidden; 
+    position: relative; 
+    cursor: pointer; 
+}
+
+.foto-perfil:hover::after { 
+    content: '📷 Alterar'; 
+    position: absolute; 
+    bottom: 0; 
+    background: rgba(1, 32, 70, 0.8); 
+    color: var(--branco); 
+    width: 100%; 
+    text-align: center; 
+    font-size: 11px; 
+    padding: 5px 0; 
+    font-weight: 600;
+}
+
+/* Toggle Switch (Botão de Pausar Solicitações) */
+.status-toggle { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    font-size: 14px; 
+    font-weight: 600; 
+    color: var(--azul-institucional); 
+}
+
+.switch { position: relative; display: inline-block; width: 46px; height: 24px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #CBD5E1; transition: .4s; border-radius: 24px; }
+.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: #10B981; } /* Verde para Ativo */
+input:checked + .slider:before { transform: translateX(22px); }
+
+/* Grid de Cards do Dashboard */
+.perfil-grid { 
+    display: grid; 
+    grid-template-columns: 2fr 1fr; 
+    gap: 20px; 
+}
+
+.card-dash { 
+    background-color: var(--branco); 
+    padding: 25px; 
+    border-radius: 12px; 
+    border: 1px solid var(--borda);
+    margin-bottom: 20px; 
+}
+
+.card-dash h3 { 
+    margin-top: 0; 
+    color: var(--azul-institucional); 
+    border-bottom: 1px solid var(--borda); 
+    padding-bottom: 10px; 
+    margin-bottom: 15px; 
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+}
+
+/* Elementos Menores (Tags e Botões de Edição) */
+.tag-habilidade { 
+    background-color: rgba(1, 32, 70, 0.05); 
+    color: var(--azul-institucional); 
+    padding: 6px 12px; 
+    border-radius: 20px; 
+    font-size: 13px; 
+    font-weight: 600; 
+    display: inline-block; 
+    margin: 0 5px 8px 0; 
+    border: 1px solid var(--borda);
+}
+
+.btn-edit { 
+    background: none; 
+    border: none; 
+    color: var(--laranja-primario); 
+    cursor: pointer; 
+    font-weight: 600; 
+    font-size: 13px;
+    transition: color 0.2s;
+}
+
+.btn-edit:hover {
+    color: var(--laranja-hover);
+}
+
+@media (max-width: 900px) {
+    .layout-painel { flex-direction: column; height: auto; overflow: visible; }
+    .dash-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--borda); display: flex; overflow-x: auto; padding: 10px; }
+    .nav-category { display: none; }
+    .nav-item { white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; }
+    .nav-item.active { border-left: none; border-bottom-color: var(--laranja-primario); }
+    .perfil-grid { grid-template-columns: 1fr; }
+    .perfil-header { flex-direction: column; text-align: center; gap: 20px; }
+}
+
+/* =========================================
+   PAINEL DO CLIENTE (DASHBOARD)
+   ========================================= */
+
+/* Selos de Status do Serviço */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.status-pendente { background-color: #FEF3C7; color: #D97706; } /* Amarelo */
+.status-agendado { background-color: #E0F2FE; color: #0284C7; } /* Azul */
+.status-andamento { background-color: #F3E8FF; color: #7E22CE; } /* Roxo */
+.status-concluido { background-color: #DCFCE7; color: #16A34A; } /* Verde */
+.status-analise { background-color: #FEE2E2; color: #DC2626; } /* Vermelho */
+
+/* Card de Pedido Ativo */
+.card-pedido {
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pedido-info h4 {
+    color: var(--azul-institucional);
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.pedido-info p {
+    color: var(--texto-cinza);
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Selos de Impacto Social (Gamificação) */
+.selos-grid {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.selo-impacto {
+    background-color: #FFF3ED;
+    border: 1px solid #FFE4D6;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    width: 120px;
+}
+
+.selo-impacto span {
+    font-size: 30px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.selo-impacto p {
+    font-size: 12px;
+    color: var(--laranja-primario);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* Botões do Cliente */
+.btn-chat-negociar {
+    background-color: var(--azul-institucional);
+    color: var(--branco);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-chat-negociar:hover { background-color: var(--azul-escuro); }
+
+.btn-recontratar {
+    background-color: var(--branco);
+    color: var(--laranja-primario);
+    border: 1px solid var(--laranja-primario);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-recontratar:hover {
+    background-color: var(--laranja-primario);
+    color: var(--branco);
+}
+
+@media (max-width: 768px) {
+    .card-pedido { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .card-pedido .botoes-acao { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+    .card-pedido .btn-chat-negociar { width: 100%; justify-content: center; }
+}
+
+/* =========================================
+   PAINEL DA INSTITUIÇÃO (Tabelas e Gestão)
+   ========================================= */
+
+.tabela-gestao-container {
+    overflow-x: auto;
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+}
+
+.tabela-gestao { 
+    width: 100%; 
+    border-collapse: collapse; 
+    text-align: left;
+}
+
+.tabela-gestao th { 
+    background-color: #F8FAFC; 
+    color: var(--azul-institucional); 
+    padding: 15px 20px; 
+    font-size: 13px; 
+    font-weight: 700;
+    border-bottom: 2px solid var(--borda); 
+}
+
+.tabela-gestao td { 
+    padding: 15px 20px; 
+    border-bottom: 1px solid var(--borda); 
+    font-size: 14px; 
+    color: var(--texto-cinza); 
+    vertical-align: middle; 
+}
+
+.tabela-gestao tr:last-child td {
+    border-bottom: none;
+}
+
+.tabela-gestao tr:hover {
+    background-color: rgba(1, 32, 70, 0.02);
+}
+
+/* Selos de Status Específicos para Instituição */
+.badge-status { 
+    padding: 5px 12px; 
+    border-radius: 50px; 
+    font-size: 11px; 
+    font-weight: 700; 
+    display: inline-block;
+}
+.status-ativo { background-color: #DCFCE7; color: #16A34A; }
+.status-pausado { background-color: #FEF3C7; color: #D97706; }
+.status-pendente-doc { background-color: #FEE2E2; color: #DC2626; }
+
+/* Botões Pequenos de Ação nas Tabelas */
+.acoes-td {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-acao-sm { 
+    background: var(--branco); 
+    border: 1px solid var(--borda); 
+    padding: 6px 12px; 
+    border-radius: 6px; 
+    font-size: 12px; 
+    cursor: pointer; 
+    color: var(--azul-institucional); 
+    font-weight: 600; 
+    transition: all 0.2s;
+}
+
+.btn-acao-sm:hover { 
+    background-color: #F8FAFC; 
+    border-color: var(--azul-institucional); 
+}
+
+.btn-acao-verde { color: #16A34A; border-color: #16A34A; }
+.btn-acao-verde:hover { background-color: #DCFCE7; }
+
+.btn-acao-vermelho { color: #DC2626; border-color: #DC2626; }
+.btn-acao-vermelho:hover { background-color: #FEE2E2; }
+
+/* =========================================
+   FILTROS DA PÁGINA DE PESQUISA
+   ========================================= */
+.filtros-container {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filtro-select {
+    padding: 10px 15px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--texto-cinza);
+    background-color: var(--branco);
+    outline: none;
+    cursor: pointer;
+    min-width: 180px;
+    font-family: inherit;
+}
+
+.filtro-select:focus {
+    border-color: var(--azul-institucional);
+}
+
+.estado-vazio {
+    text-align: center;
+    padding: 50px 20px;
+    color: #64748B;
+}
+
+.estado-vazio h3 {
+    color: var(--azul-institucional);
+    margin-bottom: 10px;
+}
+
+/* ========================================================
+   RESPONSIVIDADE - AJUSTES PARA TELAS E DISPOSITIVOS
+   ======================================================== */
+
+/* 1. Reset para garantir que nada ultrapasse a largura da tela */
+* {
+    max-width: 100%;
+}
+
+/* 2. Regra para dispositivos móveis (Telas até 768px - Celulares) */
+@media (max-width: 768px) {
+    /* Faz o layout das colunas (Grid) virar uma única coluna */
+    .checkout-container, .layout-painel {
+        grid-template-columns: 1fr !important;
+        display: block !important;
+    }
+
+    /* Ajuste no menu superior para não "quebrar" */
+    header {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .nav-links {
+        margin-top: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* Faz os cards de profissionais empilharem verticalmente */
+    .cards-coluna {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* 3. Regra para telas grandes (Monitores) */
+@media (min-width: 1200px) {
+    .section-container, .checkout-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+
+
+/* Esconde o botão no desktop, mostra no mobile */
+.menu-hamburguer {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--azul-institucional);
+}
+
+@media (max-width: 768px) {
+    .menu-hamburguer {
+        display: block;
+    }
+
+    /* Estilização do menu mobile quando ativado */
+    .nav-links.active {
+        display: flex !important;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--branco);
+        padding: 20px;
+        border-bottom: 1px solid var(--borda);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        z-index: 999;
+    }
+}
+
+
+/* =========================================
+   CORREÇÕES DE RESPONSIVIDADE DO PAINEL
+   ========================================= */
+
+/* Impede que a tabela seja esmagada pela regra global de max-width */
+.tabela-gestao, 
+.tabela-gestao tr, 
+.tabela-gestao td, 
+.tabela-gestao th {
+    max-width: none !important;
+}
+
+/* Força a tabela a ter uma largura mínima legível e permite scroll horizontal */
+.tabela-gestao-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Rolagem suave no iOS */
+    margin-bottom: 20px;
+}
+
+.tabela-gestao {
+    width: 100%;
+    min-width: 700px; /* Abaixo desse tamanho, a tabela criará scroll horizontal */
+}
+
+/* Impede que os botões de ação quebrem em várias linhas bizarras */
+.acoes-td {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap !important;
+    min-width: 180px; /* Garante espaço para os botões */
+}
+
+
+@media (max-width: 900px) {
+    /* Reduz as margens laterais na área principal para aproveitar a tela */
+    .dash-main { 
+        padding: 20px 15px !important; 
+    }
+    
+    /* Garante que o menu lateral role suavemente no horizontal */
+    .dash-sidebar { 
+        width: 100%; 
+        border-right: none; 
+        border-bottom: 1px solid var(--borda); 
+        display: flex; 
+        overflow-x: auto; 
+        padding: 10px;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+    
+    .nav-item { 
+        display: inline-block; /* Mantém os itens lado a lado no mobile */
+        border-left: none; 
+        border-bottom: 3px solid transparent; 
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Remove a regra que quebrava o flexbox do painel */
+    .layout-painel {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* Ajusta o cabeçalho para não encavalar o nome com o botão de sair */
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+/* =========================================
+   CORREÇÕES ESPECÍFICAS - PAINEL DO CLIENTE (MOBILE)
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* 1. Alinha Foto, Nome e Toggle Público um embaixo do outro */
+    #impacto .card-dash div[style*="display: flex; justify-content: space-between"] {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 20px !important;
+    }
+    
+    #impacto .card-dash div[style*="display: flex; gap: 20px"] {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    #impacto .status-toggle {
+        margin-left: 0 !important;
+        justify-content: center;
+        width: 100%;
+    }
+
+    #bio-cliente {
+        text-align: center;
+    }
+
+    /* 2. Impede que os Selos de Reputação vazem da tela */
+    #impacto .card-dash div[style*="flex-wrap: wrap"] {
+        justify-content: center !important;
+    }
+    
+    #impacto .card-dash div[style*="flex-wrap: wrap"] > div {
+        width: 100% !important;
+        max-width: 340px; /* Mantém um limite elegante sem grudar nas bordas */
+    }
+    
+    /* 3. Limpa a navegação lateral que vira carrossel no topo */
+    .dash-sidebar {
+        padding: 5px !important;
+    }
+    .nav-category {
+        display: none !important; /* Esconde os títulos cinzas (ex: "Meu Impacto") no mobile para ganhar espaço */
+    }
+}
+
+/* 4. Sobrescreve o estilo das 3 métricas coloridas para descerem em cascata */
+@media (max-width: 850px) {
+    #impacto .metrics-grid-ong {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 600px) {
+    #impacto .metrics-grid-ong {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* 5. Organiza os botões dinâmicos dos serviços em andamento */
+    .card-pedido div[style*="display: flex; justify-content: space-between"] {
+        flex-direction: column !important;
+        align-items: stretch !important; /* Faz o texto preencher a largura e o botão descer */
+        text-align: left !important;
+        gap: 15px !important;
+    }
+    .card-pedido button, 
+    .card-pedido a[href*="chat"] {
+        width: 100% !important;
+        text-align: center;
+        box-sizing: border-box;
+    }
+}
+
+/* ========================================================
+   ADAPTABILIDADE GLOBAL PARA SMARTPHONES (iPhones e Galaxies)
+   ======================================================== */
+
+/* 1ª Camada: Foco em telas de até 768px (Tablets e Celulares em pé) */
+@media (max-width: 768px) {
+    /* Prevenção absoluta de vazamento horizontal (Scroll pro lado indesejado) */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100vw !important;
+        max-width: 100% !important;
+    }
+
+    /* Ajuste global de espaçamentos (Paddings de desktop ficam péssimos no mobile) */
+    section, .hero, .servicos-populares, .impacto-banner, .contexto-pesquisa, 
+    .lista-profissionais, .sobre-historia, .sobre-arquitetura, .diferenciais-section, 
+    .destaque-section, .categorias-section, .login-main-container, .contratacao-container {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+
+    /* Força as grades estruturais a virarem uma única coluna perfeitamente alinhada */
+    .services-grid, .impacto-container, .grid-sobre, .diferenciais-grid, 
+    .destaque-grid, .perfil-topo-grid, .perfil-detalhes-grid, .avaliacoes-grid,
+    .form-group-row, .metrics-grid-ong, .ong-avatar-info {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+
+    /* Textos adaptáveis (Evita que títulos gigantes quebrem o layout) */
+    h1 { font-size: 32px !important; line-height: 1.2 !important; }
+    h2 { font-size: 22px !important; line-height: 1.3 !important; }
+    
+    /* Proteção universal para imagens não vazarem da div */
+    img {
+        max-width: 100% !important;
+        height: auto;
+    }
+
+    /* Botões e Inputs ergonômicos para os dedos (Polegar) */
+    input[type="text"], input[type="email"], input[type="password"], input[type="url"], 
+    select, textarea, .btn-enviar-solicitacao, .btn-ver-perfil, 
+    .btn-ver-perfil-destaque, .btn-contratar-agora, .btn-auth-action, .btn-impacto {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        text-align: center;
+    }
+
+    /* Ajuste seguro de Modais (Caixas flutuantes) */
+    .modal-card {
+        width: 90% !important;
+        padding: 25px 20px !important;
+        margin: 0 auto;
+    }
+}
+
+/* 2ª Camada: Ajuste fino EXCLUSIVO para as telas de Smartphones (até 430px - Ex: iPhone 15 Pro Max) */
+@media (max-width: 430px) {
+    /* Reduz ainda mais o tamanho das fontes principais */
+    h1 { font-size: 28px !important; }
+    
+    /* Reduz espaços verticais vazios de seções heroicas */
+    .hero-split, .login-main-container, .contratacao-container {
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+    }
+    
+    /* Respiro interno dos cards para não grudarem nas bordas da tela */
+    .service-card, .diferencial-card, .destaque-card, .card-dash, .professional-card, .review-box {
+        padding: 15px !important;
+    }
+    
+    /* Força cards horizontais complexos (ex: lista de profissionais) a ficarem 100% verticais e centralizados */
+    .professional-card {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+    
+    /* Ajusta o bloco de preço e botão do profissional (que ficava na direita) para ir para o fundo */
+    .card-acao {
+        border-left: none !important;
+        border-top: 1px solid var(--borda);
+        width: 100% !important;
+        padding-top: 15px !important;
+        padding-left: 0 !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Centraliza a foto e o selo na tela de perfil */
+    .topo-esquerda {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+}
+
+/* ========================================================
+   LAPIDAÇÃO - (Correções Visuais)
+   ======================================================== */
+@media (max-width: 768px) {
+    
+    /* 1. CABEÇALHO (HEADER): Evita encavalamento da logo com os botões */
+    header {
+        padding: 12px 15px !important;
+        gap: 12px !important;
+    }
+    .logo-container img {
+        height: 50px !important; /* Reduz a logo proporcionalmente para ganhar espaço */
+    }
+    .nav-links {
+        gap: 15px !important;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* 2. TELA DE LOGIN/CADASTRO: Resolve o estouro lateral das caixas */
+    .login-main-container {
+        padding: 20px 15px !important; /* Dá respiro nas laterais da tela */
+    }
+    .auth-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important; /* Garante que o padding não aumente o tamanho da caixa */
+        border-radius: 12px !important;
+        margin: 0 !important;
+    }
+    .auth-form {
+        padding: 25px 15px !important; /* Reduz o padding interno no celular para os inputs respirarem */
+    }
+
+    /* 3. FORMULÁRIOS UNIVERSAIS: Trava todos os campos para não empurrarem a tela */
+    input, select, textarea, button {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 4. MENU SUPERIOR DOS PAINÉIS: Deixa fluido igual app nativo (sem barra de rolagem feia) */
+    .dash-sidebar {
+        padding: 10px 5px !important;
+        gap: 5px !important;
+        /* Esconde a barra de rolagem visual, mas mantém o scroll no dedo */
+        -ms-overflow-style: none; 
+        scrollbar-width: none;  
+    }
+    .dash-sidebar::-webkit-scrollbar {
+        display: none !important;
+    }
+    .nav-item {
+        padding: 8px 14px !important;
+        font-size: 13px !important; /* Fonte levemente menor para exibir mais opções na tela */
+        border-radius: 6px;
+    }
+
+    /* 5. INTERFACE DO CHAT: Garante que a tela de mensagens encaixe perfeitamente */
+    .chat-container {
+        margin: 15px !important;
+        height: calc(100vh - 120px) !important; /* Ocupa a tela respeitando o topo e a base */
+        border-radius: 12px !important;
+    }
+    .chat-input-area {
+        padding: 12px !important;
+    }
+    .chat-input-area input {
+        padding: 12px 15px !important;
+    }
+
+    /* 6. CORREÇÃO DE BOTÕES LADO A LADO (Modais e Painéis) */
+    .form-group-row-compact, 
+    .botoes-acao-linha,
+    div[style*="display: flex; gap: 10px;"] {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+    }
+    .form-group-row-compact > div,
+    .botoes-acao-linha > button,
+    div[style*="display: flex; gap: 10px;"] > button {
+        width: 100% !important;
+    }
+}

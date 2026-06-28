@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleva | Encontre profissionais com mais confiança</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="home.js" defer></script>
+    
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo-completa.png" alt="Eleva Logo"></a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Como funciona</a>
+            <a href="pesquisa.html">Profissionais</a>
+            <a href="parceiros.html">Parceiros</a>
+            <a href="entrar.html" class="btn-entrar" id="btn-nav-global">Entrar</a>
+        </nav>
+    </header>
+
+    <section class="hero-split section-container">
+        <div class="hero-content-left">
+            <h1>Encontre profissionais com mais confiança</h1>
+            <p>Profissionais qualificados para serviços do dia a dia, com validação institucional e reputação construída na plataforma.</p>
+            <div class="search-container-new">
+                <input type="text" id="search-input" placeholder="Qual serviço você procura?">
+                <button class="btn-pesquisar-new" id="search-btn">Pesquisar</button>
+            </div>
+        </div>
+        <div class="hero-image-right">
+            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=600&auto=format&fit=crop" alt="Prestação de serviço real">
+        </div>
+    </section>
+
+    <section class="categorias-section section-container">
+        <h2>Encontre profissionais por categoria</h2>
+        <div class="categorias-wrapper">
+            <a href="pesquisa.html?cat=Serviços Hidráulicos" class="categoria-item">
+                <div class="categoria-icon-box"><i class="fa-solid fa-faucet-drip"></i></div>
+                <span>Serviços Hidráulicos</span>
+            </a>
+            <a href="pesquisa.html?cat=Serviços Elétricos" class="categoria-item">
+                <div class="categoria-icon-box"><i class="fa-solid fa-lightbulb"></i></div>
+                <span>Serviços Elétricos</span>
+            </a>
+            <a href="pesquisa.html?cat=Serviços de Ar-condicionado" class="categoria-item">
+                <div class="categoria-icon-box"><i class="fa-solid fa-wind"></i></div>
+                <span>Ar-condicionado</span>
+            </a>
+            <a href="pesquisa.html?cat=Pequenos Reparos" class="categoria-item">
+                <div class="categoria-icon-box"><i class="fa-solid fa-screwdriver"></i></div>
+                <span>Pequenos Reparos</span>
+            </a>
+            <a href="pesquisa.html?cat=Instalações" class="categoria-item">
+                <div class="categoria-icon-box"><i class="fa-solid fa-plug"></i></div>
+                <span>Instalações</span>
+            </a>
+            <a href="pesquisa.html?cat=Decoração" class="categoria-item">
+                <div class="categoria-icon-box"><i class="fa-solid fa-border-all"></i></div>
+                <span>Decoração</span>
+            </a>
+            <a href="pesquisa.html?cat=Serviços de Limpeza" class="categoria-item">
+                <div class="categoria-icon-box"><i class="fa-solid fa-bucket"></i></div>
+                <span>Serviços de Limpeza</span>
+            </a>
+            <a href="pesquisa.html?cat=Serviços de Piso" class="categoria-item">
+                <div class="categoria-icon-box"><i class="fa-solid fa-trowel"></i></div>
+                <span>Serviços de Piso</span>
+            </a>
+            <a href="pesquisa.html?cat=Montagem de Móveis" class="categoria-item">
+                <div class="categoria-icon-box"><i class="fa-solid fa-door-closed"></i></div>
+                <span>Montagem de Móveis</span>
+            </a>
+            <a href="pesquisa.html?cat=Fretes" class="categoria-item">
+                <div class="categoria-icon-box"><i class="fa-solid fa-truck"></i></div>
+                <span>Fretes</span>
+            </a>
+            <a href="pesquisa.html?cat=Pintura" class="categoria-item">
+                <div class="categoria-icon-box"><i class="fa-solid fa-paint-roller"></i></div>
+                <span>Pintura</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="diferenciais-section">
+        <div class="section-container">
+            <div class="diferenciais-grid">
+                <div class="diferencial-card">
+                    <div class="diferencial-icon">🛡️</div>
+                    <h3>Profissionais validados</h3>
+                    <p>Cadastrados por ONGs e programas públicos parceiros.</p>
+                </div>
+                <div class="diferencial-card">
+                    <div class="diferencial-icon">📈</div>
+                    <h3>Reputação verificável</h3>
+                    <p>Avaliações e histórico construídos a partir dos serviços realizados.</p>
+                </div>
+                <div class="diferencial-card">
+                    <div class="diferencial-icon">🔒</div>
+                    <h3>Mais segurança para contratar</h3>
+                    <p>Mais transparência antes, durante e depois da contratação.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="destaque-section">
+        <div class="section-container">
+            <h2>Profissionais em destaque</h2>
+            <div class="destaque-grid">
+                <div class="destaque-card">
+                    <div class="destaque-img-box">
+                        <img src="Gabriel Mota.png" alt="Rafael Souza">
+                    </div>
+                    <div class="destaque-info">
+                        <h3>Gabriel Mota</h3>
+                        <p class="destaque-vaga">Técnico de Refrigeração</p>
+                        <p class="destaque-regiao">Taguatinga, DF</p>
+                        <span class="badge-validado-mini">✓ Validado</span>
+                        <div class="destaque-nota">⭐ 4.9</div>
+                        <a href="perfil.html?id=4" class="btn-ver-perfil-destaque">Ver perfil</a>
+                    </div>
+                </div>
+                <div class="destaque-card">
+                    <div class="destaque-img-box">
+                        <img src="João Silva.jpeg" alt="João Silva">
+                    </div>
+                    <div class="destaque-info">
+                        <h3>João Silva</h3>
+                        <p class="destaque-vaga">Eletricista de Manutenção</p>
+                        <p class="destaque-regiao">Samambaia, DF</p>
+                        <span class="badge-validado-mini">✓ Validado</span>
+                        <div class="destaque-nota">⭐ 4.9</div>
+                        <a href="perfil.html?id=5" class="btn-ver-perfil-destaque">Ver perfil</a>
+                    </div>
+                </div>
+                <div class="destaque-card">
+                    <div class="destaque-img-box">
+                        <img src="Marcos Paulo.png" alt="Marcos Paulo">
+                    </div>
+                    <div class="destaque-info">
+                        <h3>Marcos Paulo</h3>
+                        <p class="destaque-vaga">Encanador</p>
+                        <p class="destaque-regiao">Ceilândia, DF</p>
+                        <span class="badge-validado-mini">✓ Validado</span>
+                        <div class="destaque-nota">⭐ 5.0</div>
+                        <a href="perfil.html?id=2" class="btn-ver-perfil-destaque">Ver perfil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <p>© 2026 Eleva</p>
+            <p>Projetado e Idealizado por Carla Barroso </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tipo = localStorage.getItem('usuarioTipo');
+            const btnNav = document.getElementById('btn-nav-global');
+            if(tipo && btnNav) {
+                btnNav.textContent = 'Meu Painel';
+                btnNav.href = `painel-${tipo}.html`;
+            }
+        });
+
+
+
+
+
+
+
+        // Lógica para capturar o que foi digitado na Home e enviar para a página de pesquisa
+    const searchBtn = document.getElementById('search-btn');
+    const searchInput = document.getElementById('search-input');
+
+    function realizarBusca() {
+        const termo = searchInput.value.trim();
+        // Redireciona para a página de pesquisa enviando o termo na URL
+        window.location.href = `pesquisa.html?busca=${encodeURIComponent(termo)}`;
+    }
+
+    if (searchBtn && searchInput) {
+        searchBtn.addEventListener('click', realizarBusca);
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') realizarBusca();
+        });
+    }
+    </script>
+</body>
+</html>

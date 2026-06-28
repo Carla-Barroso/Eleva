@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleva | Chat de Negociação</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Estilos extras específicos para as ações de negócio no chat */
+        .chat-container { height: calc(100vh - 120px); margin: 20px auto; }
+        .oferta-box { background-color: #FFF3ED; border: 1px solid var(--laranja-primario); padding: 15px; border-radius: 8px; text-align: center; margin: 10px 0; width: 100%; max-width: 300px; }
+        .oferta-box h4 { color: var(--laranja-primario); margin-bottom: 5px; }
+        .oferta-box p { font-size: 24px; font-weight: bold; color: var(--azul-institucional); margin-bottom: 10px; }
+        .btn-aceitar-oferta { background-color: #10B981; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; }
+        .btn-enviar-oferta { background-color: var(--laranja-primario); color: white; border: none; padding: 8px 15px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body style="background-color: var(--fundo-claro);">
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo-completa.png" alt="Eleva Logo"></a>
+        </div>
+        <nav class="nav-links">
+            <a href="#" id="btn-voltar-painel" style="font-weight: 600; color: var(--azul-institucional);">⬅ Voltar ao Painel</a>
+        </nav>
+    </header>
+
+    <main class="section-container">
+        <div class="chat-container">
+            
+            <div class="chat-header">
+                <div style="width: 45px; height: 45px; border-radius: 50%; background: #E0F2FE; color: #0369A1; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; border: 2px solid white;">
+                    👤
+                </div>
+                <div class="chat-header-info">
+                    <h3 id="chat-destinatario">Carregando...</h3>
+                    <span style="color: #A7F3D0;">🟢 Online</span>
+                </div>
+                
+                <div style="margin-left: auto;" id="area-acao-profissional">
+                    </div>
+            </div>
+
+            <div class="chat-messages" id="chat-box">
+                <div style="text-align: center; color: #94A3B8; font-size: 13px; margin-bottom: 20px;">
+                    🔒 O valor negociado aqui garante sua segurança. O pagamento será retido pela Eleva até a conclusão do serviço.
+                </div>
+                </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="input-msg" placeholder="Digite sua mensagem aqui..." onkeypress="if(event.key === 'Enter') enviarMensagem()">
+                <button onclick="enviarMensagem()">Enviar</button>
+            </div>
+            
+        </div>
+    </main>
+
+    <script>
+        const API_URL = 'https://cahdiel.pythonanywhere.com/api';
+        let meuNome = localStorage.getItem('usuarioNome');
+        let meuTipo = localStorage.getItem('usuarioTipo');
+        
+        // Pega os dados da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        let sala = urlParams.get('sala');
+        let destinatario = urlParams.get('destinatario');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!meuNome) {
+                alert('Você precisa estar logado para acessar o chat.');
+                window.location.href = 'entrar.html';
+                return;
+            }
+
+            document.getElementById('chat-destinatario').textContent = destinatario;
+            document.getElementById('btn-voltar-painel').href = `painel-${meuTipo}.html`;
+
+            // Se for profissional, mostra o botão de Enviar Orçamento
+            if (meuTipo === 'profissional') {
+                document.getElementById('area-acao-profissional').innerHTML = `
+                    <button class="btn-enviar-oferta" onclick="enviarOfertaFixa()">💰 Fixar Preço do Serviço</button>
+                `;
+            }
+
+            // Inicia o loop de carregamento de mensagens (Polling a cada 2 segundos)
+            carregarMensagens();
+            setInterval(carregarMensagens, 2000);
+        });
+
+        async function carregarMensagens() {
+            try {
+                const response = await fetch(`${API_URL}/chat/${sala}`);
+                const mensagens = await response.json();
+                
+                const chatBox = document.getElementById('chat-box');
+                // Salva o scroll para não pular a tela se já estivermos lendo
+                const isScrolledToBottom = chatBox.scrollHeight - chatBox.clientHeight <= chatBox.scrollTop + 1;
+                
+                // Limpa e redesenha (mantendo a mensagem de segurança do topo)
+                chatBox.innerHTML = `
+                    <div style="text-align: center; color: #94A3B8; font-size: 13px; margin-bottom: 20px;">
+                        🔒 O valor negociado aqui garante sua segurança. O pagamento será retido pela Eleva até a conclusão do serviço.
+                    </div>
+                `;
+
+                mensagens.forEach(msg => {
+                    const isMinha = msg.remetente === meuNome;
+                    const classeBubble = isMinha ? 'msg-sent' : 'msg-received';
+                    
+                    // Identifica se a mensagem é um Orçamento Especial
+                    if (msg.texto.startsWith("OFERTA_FIXA:")) {
+                        const valor = msg.texto.replace("OFERTA_FIXA:", "");
+                        const botaoAceitar = (!isMinha && meuTipo === 'cliente') 
+                            ? `<button class="btn-aceitar-oferta" onclick="aceitarOferta('${valor}')">✔️ Aceitar e Pagar</button>` 
+                            : `<p style="font-size: 12px; color: #64748B;">Aguardando aceite do cliente...</p>`;
+
+                        chatBox.innerHTML += `
+                            <div class="msg-bubble ${classeBubble}" style="background: transparent; box-shadow: none; padding: 0;">
+                                <div class="oferta-box">
+                                    <h4>Orçamento Fechado</h4>
+                                    <p>R$ ${valor}</p>
+                                    ${botaoAceitar}
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        // Mensagem de texto normal
+                        chatBox.innerHTML += `
+                            <div class="msg-bubble ${classeBubble}">
+                                <strong>${isMinha ? 'Você' : msg.remetente}</strong><br>
+                                ${msg.texto}
+                            </div>
+                        `;
+                    }
+                });
+
+                // Rola para baixo se tiver nova mensagem
+                if (isScrolledToBottom) {
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }
+            } catch (error) {
+                console.error("Erro ao carregar chat:", error);
+            }
+        }
+
+        async function enviarMensagem(textoForcado = null) {
+            const inputElement = document.getElementById('input-msg');
+            const texto = textoForcado || inputElement.value.trim();
+            
+            if (!texto) return;
+
+            try {
+                await fetch(`${API_URL}/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sala: sala, remetente: meuNome, texto: texto })
+                });
+
+                inputElement.value = ''; // Limpa o input
+                carregarMensagens();     // Atualiza na hora
+            } catch (error) {
+                alert('Erro ao enviar mensagem.');
+            }
+        }
+
+        // Função do Profissional
+        function enviarOfertaFixa() {
+            const valor = prompt("Qual o valor final acordado para o serviço? (Ex: 150,00)");
+            if (valor) {
+                enviarMensagem(`OFERTA_FIXA:${valor}`);
+            }
+        }
+
+        // Função do Cliente
+        function aceitarOferta(valor) {
+            alert(`Orçamento de R$ ${valor} aceito! Você será redirecionado para o Pagamento Seguro.`);
+            // No próximo passo, criaremos a página de pagamento e enviaremos esses dados para ela
+            window.location.href = `pagamento.html?valor=${valor}&prof=${destinatario}`;
+        }
+    </script>
+</body>
+</html>

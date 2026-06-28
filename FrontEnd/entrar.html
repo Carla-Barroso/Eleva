@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleva | Acesse sua Conta</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="auth.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo-completa.png" alt="Eleva Logo"></a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Como funciona</a>
+            <a href="pesquisa.html">Profissionais</a>
+            <a href="parceiros.html">Parceiros</a>
+            <a href="entrar.html" class="btn-entrar" id="btn-nav-global">Entrar</a>
+        </nav>
+    </header>
+
+    <main class="login-main-container">
+        
+        <div class="auth-wrapper">
+            
+            <div class="auth-logo-header">
+                <img src="logo-completa.png" alt="Eleva Logo">
+            </div>
+
+            <div class="auth-card">
+                
+                <div class="auth-tabs">
+                    <button id="tab-login" class="auth-tab active" onclick="switchTab('login')">Acessar</button>
+                    <button id="tab-register" class="auth-tab" onclick="switchTab('register')">Cadastrar</button>
+                    <button id="tab-activate" class="auth-tab" onclick="switchTab('activate')">Ativar Conta</button>
+                </div>
+
+                <form id="form-login" class="auth-form active">
+                    <h2>Que bom ver você de novo!</h2>
+                    <p class="auth-sub">Acesse sua conta para gerenciar seus pedidos.</p>
+
+                    <div class="form-group">
+                        <label for="login-email">E-mail ou ID de Ativação</label>
+                        <input type="text" id="login-email" placeholder="seuemail@exemplo.com ou ELEVA-XXXX" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password">Senha</label>
+                        <input type="password" id="login-password" placeholder="••••••••" required>
+                    </div>
+
+                    <button type="submit" class="btn-auth-action">Entrar</button>
+                </form>
+
+                <form id="form-register" class="auth-form" style="display: none;">
+                    <h2>Crie sua conta no Eleva</h2>
+                    <p class="auth-sub">Cadastre-se para solicitar serviços com segurança.</p>
+
+                    <div class="social-login-container">
+                        <a href="#" class="btn-social btn-facebook">📘 Cadastrar com o Facebook</a>
+                        <a href="#" class="btn-social btn-google">🌐 Cadastrar com o Google</a>
+                    </div>
+
+                    <div class="auth-divisor"><span>ou preencha seus dados</span></div>
+
+                    <div class="form-group">
+                        <label for="reg-nome">Nome Completo</label>
+                        <input type="text" id="reg-nome" placeholder="Ex: Alberto Silva" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-email">E-mail</label>
+                        <input type="email" id="reg-email" placeholder="seuemail@exemplo.com" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="reg-tipo">Tipo de Conta</label>
+                        <select id="reg-tipo" required>
+                            <option value="cliente">Cliente</option>
+                            <option value="instituicao">Instituição</option>
+                        </select>
+                    </div>
+
+
+
+
+
+                    <div class="form-group-row-compact">
+                        <div class="form-group">
+                            <label for="reg-whatsapp">WhatsApp</label>
+                            <input type="tel" id="reg-whatsapp" placeholder="(61) 99999-9999" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-password">Senha</label>
+                            <input type="password" id="reg-password" placeholder="Mínimo 8 caract." required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-auth-action">Concluir Cadastro</button>
+                </form>
+
+                <form id="form-activate" class="auth-form" style="display: none;">
+                    <h2>Área do Profissional</h2>
+                    <p class="auth-sub">Foi cadastrado por uma instituição parceira? Use seu ID de acesso para definir sua senha e entrar.</p>
+
+                    <div class="form-group">
+                        <label for="act-id">ID de Ativação (Fornecido pela Instituição)</label>
+                        <input type="text" id="act-id" placeholder="Ex: ELEVA-1234" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="act-password">Definir Nova Senha</label>
+                        <input type="password" id="act-password" placeholder="Mínimo 8 caracteres" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="act-password-confirm">Confirmar Senha</label>
+                        <input type="password" id="act-password-confirm" placeholder="Repita sua nova senha" required>
+                    </div>
+
+                    <button type="submit" class="btn-auth-action">Ativar e Fazer Login</button>
+                </form>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>© 2026 Eleva</p>
+            <p>Projetado e Idealizado por Carla Barroso</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabName) {
+            document.getElementById('form-login').style.display = 'none';
+            document.getElementById('form-register').style.display = 'none';
+            document.getElementById('form-activate').style.display = 'none';
+            
+            document.querySelectorAll('.auth-tab').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(form => form.classList.remove('active'));
+            
+            document.getElementById('tab-' + tabName).classList.add('active');
+            const activeForm = document.getElementById('form-' + tabName);
+            activeForm.style.display = 'block';
+            
+            setTimeout(() => {
+                activeForm.classList.add('active');
+            }, 10);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tipo = localStorage.getItem('usuarioTipo');
+            const btnNav = document.getElementById('btn-nav-global');
+            if(tipo && btnNav) {
+                btnNav.textContent = 'Meu Painel';
+                btnNav.href = `painel-${tipo}.html`;
+            }
+        });
+    </script>
+</body>
+</html>

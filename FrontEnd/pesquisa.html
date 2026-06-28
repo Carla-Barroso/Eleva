@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleva | Buscar Profissionais</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo-completa.png" alt="Eleva Logo"></a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Como funciona</a>
+            <a href="pesquisa.html">Profissionais</a>
+            <a href="parceiros.html">Parceiros</a>
+            <a href="entrar.html" class="btn-entrar" id="btn-nav-global">Entrar</a>
+        </nav>
+    </header>
+
+    <section class="contexto-pesquisa">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <h2>Encontre profissionais de confiança</h2>
+            <p style="color: var(--texto-cinza); margin-bottom: 25px;">Todos os perfis são validados por instituições sociais parceiras.</p>
+            
+            <div class="search-container-new" style="margin: 0 auto;">
+                <input type="text" id="input-busca" placeholder="Ex: Eletricista, Encanador, Pintor..." onkeyup="filtrarProfissionais()">
+                <button class="btn-pesquisar-new" onclick="filtrarProfissionais()">Buscar</button>
+            </div>
+
+            <div class="filtros-container">
+                <select class="filtro-select" id="filtro-categoria" onchange="filtrarProfissionais()">
+                    <option value="todas">Todas as Categorias</option>
+                    <option value="Manutenção e Reparos">Manutenção e Reparos</option>
+                    <option value="Obras e Reformas">Obras e Reformas</option>
+                    <option value="Limpeza">Limpeza e Diaristas</option>
+                    <option value="Tecnologia">Tecnologia e Informática</option>
+                </select>
+
+                <select class="filtro-select" id="filtro-regiao" onchange="filtrarProfissionais()">
+                    <option value="todas">Todas as Regiões (DF)</option>
+                    <option value="Taguatinga">Taguatinga</option>
+                    <option value="Ceilândia">Ceilândia</option>
+                    <option value="Plano Piloto">Plano Piloto</option>
+                    <option value="Samambaia">Samambaia</option>
+                </select>
+
+                <select class="filtro-select" id="filtro-ordenacao" onchange="filtrarProfissionais()">
+                    <option value="recomendados">Mais Recomendados (Nota)</option>
+                    <option value="preco-menor">Menor Preço Inicial</option>
+                    <option value="experiencia">Mais Serviços Realizados</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <section class="lista-profissionais">
+        <div class="cards-coluna" id="container-resultados">
+            <p style="text-align:center; padding: 50px; color: #64748B;">Carregando profissionais...</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <p>© 2026 Eleva</p>
+            <p>Projetado e Idealizado por Carla Barroso</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_URL = 'https://cahdiel.pythonanywhere.com/api';
+        let todosProfissionais = []; 
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Ler o que veio da URL (da Home)
+            const urlParams = new URLSearchParams(window.location.search);
+            const termoBusca = urlParams.get('busca');
+
+            // Se tiver algo na busca, joga no input e filtra automaticamente
+            if (termoBusca) {
+            document.getElementById('input-busca').value = termoBusca;
+            }
+
+
+
+            const tipo = localStorage.getItem('usuarioTipo');
+            const btnNav = document.getElementById('btn-nav-global');
+            if(tipo && btnNav) {
+                btnNav.textContent = 'Meu Painel';
+                btnNav.href = `painel-${tipo}.html`;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/profissionais`);
+                const data = await response.json();
+                
+                todosProfissionais = data;
+                
+                if(todosProfissionais.length === 0) {
+                    todosProfissionais = [{
+                        id: 1, nome: "João Silva", profissao: "Eletricista", categoria: "Manutenção e Reparos",
+                        regiao: "Taguatinga, DF", instituicao: "Instituto Caminhos", foto: "",
+                        nota: 4.9, avaliacoes_qtd: 42, servicos_qtd: 120, preco_inicial: "80,00",
+                        review_recente: "Excelente profissional, chegou no horário e resolveu o problema rápido.",
+                        review_autor: "Maria F."
+                    },
+                    {
+                        id: 2, nome: "Marcos Paulo", profissao: "Encanador", categoria: "Manutenção e Reparos",
+                        regiao: "Ceilândia, DF", instituicao: "Associação Construir", foto: "",
+                        nota: 4.7, avaliacoes_qtd: 18, servicos_qtd: 54, preco_inicial: "100,00",
+                        review_recente: "Muito educado e prestativo. O preço foi justo.",
+                        review_autor: "Carlos E."
+                    }];
+                }
+
+                // Se veio um termo da home, já filtra. Se não, mostra todos.
+    if (termoBusca) {
+        filtrarProfissionais(); // Isso já vai ler o input que preenchemos acima
+    } else {
+        renderizarLista(todosProfissionais);
+    }
+            } catch (error) {
+                console.error("Erro ao buscar profissionais:", error);
+                document.getElementById('container-resultados').innerHTML = `
+                    <div class="estado-vazio">
+                        <h3>⚠️ Não foi possível conectar ao servidor.</h3>
+                        <p>Verifique se o seu arquivo app.py está rodando no terminal.</p>
+                    </div>
+                `;
+            }
+        });
+
+        function renderizarLista(lista) {
+            const container = document.getElementById('container-resultados');
+            container.innerHTML = ''; 
+
+            if (lista.length === 0) {
+                container.innerHTML = `
+                    <div class="estado-vazio">
+                        <h3>Nenhum profissional encontrado</h3>
+                        <p>Tente mudar as palavras-chave ou remover os filtros de região e categoria.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            lista.forEach(prof => {
+                const inicial = prof.nome.charAt(0);
+                const fotoHtml = prof.foto && prof.foto !== "" 
+                    ? `<img src="${prof.foto}" alt="Foto de ${prof.nome}">` 
+                    : `<div style="width:110px; height:110px; border-radius:50%; background:#E0F2FE; color:#0369A1; display:flex; align-items:center; justify-content:center; font-size:40px; font-weight:bold; border:3px solid #E2E8F0;">${inicial}</div>`;
+
+                const cardHTML = `
+                    <div class="professional-card">
+                        <div class="card-foto">
+                            ${fotoHtml}
+                        </div>
+                        <div class="card-detalhes">
+                            <div class="nome-linha">
+                                <h3>${prof.nome}</h3>
+                                <span class="badge-validado">validado pela Instituição: ${prof.instituicao}</span>
+                            </div>
+                            <p class="profissao">${prof.profissao}</p>
+                            <p class="localidade"> ${prof.regiao}</p>
+                            
+                            <div class="card-metricas">
+                                <span class="rating">⭐ ${prof.nota} (${prof.avaliacoes_qtd})</span>
+                                <span class="separador">|</span>
+                                <span class="servicos-contados"> ${prof.servicos_qtd} serviços</span>
+                            </div>
+                            
+                            <p class="recente-review">"${prof.review_recente}" - <em>${prof.review_autor}</em></p>
+                        </div>
+                        <div class="card-acao">
+                            <div class="preco-tag">
+                                <span class="label-preco">Visita a partir de</span>
+                                <span class="valor-preco">R$ ${prof.preco_inicial}</span>
+                            </div>
+                            <a href="perfil.html?id=${prof.id}" class="btn-ver-perfil">Ver Perfil</a>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+        }
+
+        function filtrarProfissionais() {
+            const textoBusca = document.getElementById('input-busca').value.toLowerCase();
+            const categoria = document.getElementById('filtro-categoria').value;
+            const regiao = document.getElementById('filtro-regiao').value;
+            const ordenacao = document.getElementById('filtro-ordenacao').value;
+
+            let filtrados = todosProfissionais.filter(prof => {
+                const bateTexto = prof.nome.toLowerCase().includes(textoBusca) || prof.profissao.toLowerCase().includes(textoBusca);
+                const bateCategoria = categoria === 'todas' || prof.categoria === categoria;
+                const bateRegiao = regiao === 'todas' || prof.regiao.includes(regiao);
+                
+                return bateTexto && bateCategoria && bateRegiao;
+            });
+
+            if (ordenacao === 'recomendados') {
+                filtrados.sort((a, b) => b.nota - a.nota);
+            } else if (ordenacao === 'experiencia') {
+                filtrados.sort((a, b) => b.servicos_qtd - a.servicos_qtd);
+            } else if (ordenacao === 'preco-menor') {
+                filtrados.sort((a, b) => parseFloat(a.preco_inicial.replace(',','.')) - parseFloat(b.preco_inicial.replace(',','.')));
+            }
+
+            renderizarLista(filtrados);
+        }
+    </script>
+</body>
+</html>

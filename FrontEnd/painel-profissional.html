@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleva | Painel do Profissional</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo-completa.png" alt="Eleva Logo"></a>
+        </div>
+        <nav class="nav-links">
+            <span style="font-weight: 500; color: var(--azul-institucional);" id="nome-usuario-nav">Carregando...</span>
+            <a href="#" onclick="fazerLogout()" style="color: #EF4444; font-weight: 600;">Sair da conta</a>
+        </nav>
+    </header>
+
+    <div class="layout-painel">
+        
+        <aside class="dash-sidebar">
+            <div class="nav-category">Principal</div>
+            <a href="#" class="nav-item active" onclick="showSection('perfil', this)">Meu Perfil</a>
+            <a href="#" class="nav-item" onclick="showSection('solicitacoes', this)">Solicitações</a>
+            <a href="#" class="nav-item" onclick="showSection('agenda', this)">Minha Agenda</a>
+            <a href="#" class="nav-item" onclick="showSection('execucao', this)">Execução de Serviço</a>
+
+            <div class="nav-category">Desempenho</div>
+            <a href="#" class="nav-item" onclick="showSection('ganhos', this)">Meus Ganhos</a>
+            <a href="#" class="nav-item" onclick="showSection('reputacao', this)">Minha Reputação</a>
+            <a href="#" class="nav-item" onclick="showSection('evolucao', this)">Minha Evolução</a>
+            <a href="#" class="nav-item" onclick="showSection('historico', this)">Histórico</a>
+
+            <div class="nav-category">Suporte</div>
+            <a href="#" class="nav-item" onclick="showSection('instituicao', this)">Minha Instituição</a>
+            <a href="#" class="nav-item" onclick="showSection('conflitos', this)">Contestação</a>
+        </aside>
+
+        <main class="dash-main">
+            
+            <section id="perfil" class="dash-section active">
+                
+                <div class="perfil-header">
+                    <div class="perfil-info-basic">
+                        
+                        <!--<div class="foto-perfil" title="Atualizar Foto">👨🏽‍🔧</div>-->
+                        <!--mudanca na foto do perfil do profissional-->
+                        <div>
+                            <div class="foto-container" id="foto-preview-prof" onclick="document.getElementById('upload-foto-prof').click()" style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; cursor: pointer; border: 3px solid #E2E8F0; background-color: #E0F2FE; display: flex; align-items: center; justify-content: center; background-size: cover; background-position: center; position: relative;">
+                                <span id="icone-padrao-prof" style="font-size: 40px;">👨🏽‍🔧</span>
+                                <div class="foto-overlay" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 35%; background: rgba(15, 23, 42, 0.6); display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; opacity: 0; transition: 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+                                    <i class="fa-solid fa-camera"></i>
+                                </div>
+                            </div>
+                                <input type="file" id="upload-foto-prof" accept="image/png, image/jpeg" style="display: none;" onchange="alterarFotoProfissional(event)">
+                        </div>
+                        <!--FIM da mudança-->
+
+                        <div>
+                            <h2 style="margin: 0; color: var(--azul-institucional);" id="nome-perfil">Profissional</h2>
+                            <p style="margin: 5px 0 0; color: var(--texto-cinza);">📍 Região: Taguatinga e Ceilândia (DF)</p>
+                            <p style="margin: 5px 0 0; font-weight: 600; color: #F59E0B;">⭐ 4.9 (42 avaliações) · 50 serviços realizados</p>
+                        </div>
+                    </div>
+                    
+                    <div class="status-toggle">
+                        <span>Receber solicitações:</span>
+                        <label class="switch">
+                            <input type="checkbox" checked title="Pausar recebimento de solicitações">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="perfil-grid">
+                    <div>
+                        <div class="card-dash">
+                            <h3>História de Vida <button class="btn-edit">Editar</button></h3>
+                            <p style="color: var(--texto-cinza);">Sou profissional dedicado e busco resolver problemas com honestidade e preço justo, deixando o ambiente limpo após o serviço.</p>
+                        </div>
+
+                        <div class="card-dash">
+                            <h3>Habilidades e Certificações <button class="btn-edit">Editar</button></h3>
+                            <div style="margin-bottom: 20px;">
+                                <strong style="color: var(--azul-institucional); display: block; margin-bottom: 8px;">Habilidades:</strong>
+                                <span class="tag-habilidade">Instalação Elétrica</span>
+                                <span class="tag-habilidade">Manutenção de Quadros</span>
+                                <span class="tag-habilidade">Encanamento Básico</span>
+                                <span class="tag-habilidade">Reparo de Infiltrações</span>
+                            </div>
+                            <div>
+                                <strong style="color: var(--azul-institucional); display: block; margin-bottom: 8px;">Certificações Validadas:</strong>
+                                <ul style="color: var(--texto-cinza); padding-left: 20px; font-size: 14px;">
+                                    <li style="margin-bottom: 5px;">NR-10 (Segurança em Instalações) - SENAI (2023)</li>
+                                    <li>Curso Básico - ONG Parceira (2024)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card-dash">
+                            <h3>Últimos Comentários</h3>
+                            <div style="border-bottom: 1px solid var(--borda); padding-bottom: 10px; margin-bottom: 10px;">
+                                <p style="margin: 0; color: var(--azul-institucional);"><strong>Maria F.</strong> <span style="color: #F59E0B;">⭐⭐⭐⭐⭐</span></p>
+                                <p style="color: var(--texto-cinza); font-size: 13px; font-style: italic; margin-top: 5px;">"Excelente profissional, chegou no horário e resolveu tudo rapidinho."</p>
+                            </div>
+                            <div>
+                                <p style="margin: 0; color: var(--azul-institucional);"><strong>Carlos E.</strong> <span style="color: #F59E0B;">⭐⭐⭐⭐⭐</span></p>
+                                <p style="color: var(--texto-cinza); font-size: 13px; font-style: italic; margin-top: 5px;">"Muito educado e o preço foi justo. Recomendo!"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="card-dash">
+                            <h3>Preço e Disponibilidade <button class="btn-edit">Editar</button></h3>
+                            <p style="color: var(--texto-cinza); margin-bottom: 10px;"><strong>Valor da visita:</strong> R$ 80,00</p>
+                            <p style="color: var(--texto-cinza);"><strong>Preço médio:</strong> R$ 150 - R$ 300</p>
+                            
+                            <hr style="border: none; border-top: 1px solid var(--borda); margin: 20px 0;">
+                            
+                            <p style="color: var(--texto-cinza); margin-bottom: 10px;"><strong>Dias de atuação:</strong><br>Segunda a Sábado</p>
+                            <p style="color: var(--texto-cinza);"><strong>Horários:</strong><br>08:00 às 18:00</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="solicitacoes" class="dash-section">
+                <div class="card-dash">
+                    <h2>Novas Solicitações de Serviço</h2>
+                    <div id="lista-solicitacoes">
+                        <p style="color: var(--texto-cinza);">Carregando solicitações...</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="execucao" class="dash-section">
+                <h2 style="color: var(--azul-institucional); margin-bottom: 20px;">Serviços em Execução</h2>
+                <p style="color: var(--texto-cinza); margin-bottom: 25px;">Gerencie as ordens de serviço ativas e valide a sua chegada ao local.</p>
+                
+                <div id="lista-execucao">
+                    <p style="color: var(--texto-cinza);">Carregando ordens de serviço...</p>
+                </div>
+            </section>
+
+            <section id="ganhos" class="dash-section">
+                <h2 style="color: var(--azul-institucional); margin-bottom: 20px;">Resumo Financeiro</h2>
+                
+                <div class="metrics-grid-ong" style="grid-template-columns: 1fr 1fr; margin-bottom: 25px;">
+                    <div class="metric-card-ong" style="border: 2px solid #10B981; background-color: #F0FDF4;">
+                        <div class="metric-icon" style="background: #D1FAE5; color: #047857;">💰</div>
+                        <div class="metric-data">
+                            <h4 id="valor-disponivel" style="color: #047857;">R$ 0,00</h4>
+                            <p style="color: #065F46;">Saldo Disponível (Liberado para saque)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card-ong" style="border: 1px dashed #CBD5E1; background-color: #F8FAFC;">
+                        <div class="metric-icon" style="background: #E2E8F0; color: #64748B;">🔒</div>
+                        <div class="metric-data">
+                            <h4 id="valor-retido" style="color: #475569;">R$ 0,00</h4>
+                            <p style="color: #64748B;">Saldo Retido (Serviços em Andamento)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-dash">
+                    <h3>Transparência e Impacto Institucional</h3>
+                    <p style="color: var(--texto-cinza); font-size: 14px; margin-bottom: 15px;">O valor que você negocia com o cliente é <strong>100% seu</strong>. A Eleva cobra uma taxa de <strong>10%</strong> do cliente no ato do pagamento para manter a estrutura e repassar recursos para a sua Instituição Parceira.</p>
+                    
+                    <div style="background-color: #FFF3ED; border: 1px solid #FFE4D6; padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: var(--laranja-primario); font-weight: 600;">Impacto que seus serviços já geraram para a ONG:</span>
+                        <strong id="valor-ong-retido" style="color: var(--azul-institucional); font-size: 18px;">R$ 0,00</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section id="instituicao" class="dash-section">
+                <div class="card-dash">
+                    <h2>Minha Instituição Parceira</h2>
+                    <p style="color: var(--texto-cinza);">Sua conta é acompanhada e garantida por:</p>
+                    <div style="background-color: var(--fundo-claro); padding: 20px; border-radius: 8px; border: 1px solid var(--borda); margin-top: 15px;">
+                        <h3 style="margin: 0 0 10px 0; border: none; padding: 0;">Instituto Caminhos</h3>
+                        <p style="margin: 0 0 5px 0; color: var(--texto-cinza); font-size: 14px;">📞 Contato: (61) 3333-4444</p>
+                        <p style="margin: 0; color: var(--texto-cinza); font-size: 14px;">✉️ Email: suporte@institutocaminhos.org.br</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="agenda" class="dash-section"><div class="card-dash"><p>Agenda em desenvolvimento.</p></div></section>
+            <section id="reputacao" class="dash-section"><div class="card-dash"><p>Reputação em desenvolvimento.</p></div></section>
+            <section id="evolucao" class="dash-section"><div class="card-dash"><p>Evolução em desenvolvimento.</p></div></section>
+            <section id="historico" class="dash-section"><div class="card-dash"><p>Histórico em desenvolvimento.</p></div></section>
+            <section id="conflitos" class="dash-section"><div class="card-dash"><p>Central de conflitos.</p></div></section>
+
+        </main>
+    </div>
+
+    <script>
+        function showSection(sectionId, element) {
+            document.querySelectorAll('.dash-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+            
+            const sectionTarget = document.getElementById(sectionId);
+            if(sectionTarget) sectionTarget.classList.add('active');
+            if(element) element.classList.add('active');
+
+            if(sectionId === 'ganhos') carregarGanhos();
+            if(sectionId === 'execucao') carregarExecucao();
+        }
+
+        // Função de Logout Seguro
+        function fazerLogout() {
+            localStorage.removeItem('usuarioNome');
+            localStorage.removeItem('usuarioTipo');
+            window.location.href = 'entrar.html';
+        }
+
+        //document.addEventListener('DOMContentLoaded', () => {
+            //const meuNome = localStorage.getItem('usuarioNome'); 
+            //if(meuNome) {
+                //document.getElementById('nome-usuario-nav').textContent = `Olá, ${meuNome}`;
+                //document.getElementById('nome-perfil').textContent = meuNome;
+           // } else {
+               // window.location.href = 'entrar.html';
+               // return;
+            //}
+            //carregarSolicitacoes();
+        //});
+        //nova função
+        document.addEventListener('DOMContentLoaded', () => {
+            const meuNome = localStorage.getItem('usuarioNome'); 
+            if(meuNome) {
+                document.getElementById('nome-usuario-nav').textContent = `Olá, ${meuNome}`;
+                document.getElementById('nome-perfil').textContent = meuNome;
+                
+                // NOVO: Carrega a foto do banco quando o profissional entra no painel
+                fetch(`https://cahdiel.pythonanywhere.com/api/usuarios/foto/${meuNome}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.sucesso && data.foto) {
+                            document.getElementById('foto-preview-prof').style.backgroundImage = `url(${data.foto})`;
+                            document.getElementById('icone-padrao-prof').style.display = 'none';
+                        }
+                    }).catch(e => console.error(e));
+
+            } else {
+                window.location.href = 'entrar.html';
+                return;
+            }
+            carregarSolicitacoes();
+        });
+        //fim da nova função
+
+
+        async function carregarSolicitacoes() {
+            const meuNome = localStorage.getItem('usuarioNome'); 
+            if(!meuNome) return;
+            
+            try {
+                const response = await fetch(`https://cahdiel.pythonanywhere.com/api/solicitacoes/${meuNome}`);
+                const solicitacoes = await response.json();
+                const container = document.getElementById('lista-solicitacoes');
+                
+                if(solicitacoes.length === 0) {
+                    container.innerHTML = '<p style="color: var(--texto-cinza);">Nenhuma solicitação pendente no momento.</p>';
+                    return;
+                }
+
+                container.innerHTML = '';
+                
+                solicitacoes.forEach(sol => {
+                    const salaId = `chat_${sol.nome_cliente}_${meuNome}`.replace(/\s+/g, '_').toLowerCase();
+                    container.innerHTML += `
+                        <div style="border: 1px solid var(--borda); padding: 15px; border-radius: 8px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; background-color: #F8FAFC;">
+                            <div>
+                                <h4 style="margin: 0; color: var(--azul-institucional);">Nova mensagem de: ${sol.nome_cliente}</h4>
+                                <p style="margin: 5px 0 0; font-size: 13px; color: #64748B;">Status: ${sol.status} | Aguardando seu orçamento</p>
+                            </div>
+                            <a href="chat.html?sala=${salaId}&destinatario=${sol.nome_cliente}" style="background-color: var(--laranja-primario); color: white; padding: 10px 15px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 13px;">💬 Abrir Chat</a>
+                        </div>
+                    `;
+                });
+            } catch(e) { console.error(e); }
+        }
+
+        async function carregarGanhos() {
+            const meuNome = localStorage.getItem('usuarioNome'); 
+            if(!meuNome) return;
+            
+            try {
+                const response = await fetch(`https://cahdiel.pythonanywhere.com/api/ganhos/${meuNome}`);
+                const ganhos = await response.json();
+                
+                const formatarMoeda = (valor) => valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                
+                document.getElementById('valor-retido').textContent = `R$ ${formatarMoeda(ganhos.saldo_retido)}`;
+                document.getElementById('valor-disponivel').textContent = `R$ ${formatarMoeda(ganhos.saldo_disponivel)}`;
+                document.getElementById('valor-ong-retido').textContent = `R$ ${formatarMoeda(ganhos.taxa_ong_retida)}`;
+            } catch(e) { console.error(e); }
+        }
+
+        async function carregarExecucao() {
+            const meuNome = localStorage.getItem('usuarioNome');
+            if(!meuNome) return;
+
+            try {
+                const response = await fetch(`https://cahdiel.pythonanywhere.com/api/solicitacoes/${meuNome}`);
+                const servicos = await response.json();
+                const container = document.getElementById('lista-execucao');
+                
+                const ativos = servicos.filter(s => s.status === 'Pago (Retido)' || s.status === 'Em Andamento');
+
+                if(ativos.length === 0) {
+                    container.innerHTML = '<p style="color: var(--texto-cinza);">Nenhum serviço em fase de execução no momento.</p>';
+                    return;
+                }
+
+                container.innerHTML = '';
+                
+                ativos.forEach(s => {
+                    let acaoHtml = '';
+                    
+                    if(s.status === 'Pago (Retido)') {
+                        acaoHtml = `
+                            <div style="margin-top: 15px; display: flex; gap: 10px; align-items: center;">
+                                <input type="text" id="token-${s.id}" placeholder="Código de 4 dígitos" style="padding: 8px 12px; border: 1px solid var(--borda); border-radius: 6px; width: 160px; font-weight: bold; text-align: center;">
+                                <button onclick="validarInicioServico(${s.id})" style="background-color: var(--azul-institucional); color: white; border: none; padding: 9px 15px; border-radius: 6px; font-weight: bold; cursor: pointer;">Confirmar Chegada</button>
+                            </div>
+                        `;
+                    } else if(s.status === 'Em Andamento') {
+                        acaoHtml = `
+                            <div style="margin-top: 15px; background-color: #F3E8FF; border: 1px solid #C084FC; padding: 12px; border-radius: 6px; color: #6B21A8; font-size: 13.5px; font-weight: 500;">
+                                🛠️ <strong>Serviço em Andamento:</strong> Quando terminar o trabalho, solicite ao cliente para clicar em "Confirmar Conclusão" no painel dele para liberar o pagamento.
+                            </div>
+                        `;
+                    }
+
+                    container.innerHTML += `
+                        <div class="card-dash" style="border-left: 4px solid var(--laranja-primario); margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <h4>Cliente: ${s.nome_cliente}</h4>
+                                <span class="badge-tipo-instituicao" style="background-color: #E0F2FE; color: #0369A1; border-color: #BAE6FD;">${s.status}</span>
+                            </div>
+                            <p style="margin: 8px 0 0; color: var(--texto-cinza); font-size: 14px;"><strong>Acordo:</strong> ${s.detalhes}</p>
+                            ${acaoHtml}
+                        </div>
+                    `;
+                });
+            } catch(e) { console.error(e); }
+        }
+
+        async function validarInicioServico(id) {
+            const codigoDigitado = document.getElementById(`token-${id}`).value.trim();
+            if(!codigoDigitado) { alert("Digite o código fornecido pelo cliente."); return; }
+
+            try {
+                const response = await fetch('https://cahdiel.pythonanywhere.com/api/servico/iniciar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ solicitacao_id: id, codigo: codigoDigitado })
+                });
+                const data = await response.json();
+
+                if(data.sucesso) {
+                    alert(data.mensagem);
+                    carregarExecucao(); 
+                } else {
+                    alert(data.mensagem);
+                }
+            } catch(e) { alert("Erro ao processar inicialização."); }
+        }
+
+
+        //função da foto
+        // NOVO: Função que processa e envia a foto escolhida
+        async function alterarFotoProfissional(event) {
+            const file = event.target.files[0];
+            const meuNome = localStorage.getItem('usuarioNome');
+            if (file) {
+                if (file.size > 2 * 1024 * 1024) {
+                    alert("A imagem é muito grande! Escolha uma foto com menos de 2MB.");
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const base64Image = e.target.result;
+                    
+                    // Atualiza instantaneamente na tela do painel
+                    document.getElementById('foto-preview-prof').style.backgroundImage = `url(${base64Image})`;
+                    document.getElementById('icone-padrao-prof').style.display = 'none';
+                    
+                    // Envia para o banco de dados (graças à mudança no app.py, vai para todas as telas)
+                    try {
+                        await fetch(`https://cahdiel.pythonanywhere.com/api/usuarios/foto`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ nome: meuNome, foto: base64Image })
+                        });
+                        alert("Foto de perfil atualizada com sucesso no seu perfil público!");
+                    } catch (error) {
+                        alert("Erro ao salvar foto no servidor.");
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>

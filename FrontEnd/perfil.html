@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleva | Perfil do Profissional</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo-completa.png" alt="Eleva Logo"></a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Como funciona</a>
+            <a href="pesquisa.html">Profissionais</a>
+            <a href="parceiros.html">Parceiros</a>
+            <a href="entrar.html" class="btn-entrar" id="btn-nav-global">Entrar</a>
+        </nav>
+    </header>
+
+    <div class="breadcrumbs section-container">
+        <p><a href="index.html">Início</a> > <a href="pesquisa.html">Profissionais</a> > <span class="atual" id="bread-nome">Perfil</span></p>
+    </div>
+
+    <main class="perfil-principal section-container">
+        
+        <div class="perfil-topo-grid">
+            
+            <div class="topo-esquerda">
+                <div class="foto-bloco">
+                    <div id="foto-container"></div>
+                    <div class="linkedin-badge" title="Identidade Institucional Verificada">✓</div>
+                    <span class="tag-disponivel">Disponível</span>
+                </div>
+                <div>
+                    <div class="nome-verificado">
+                        <h2 id="prof-nome">Carregando...</h2>
+                        <div class="selo-verificado" title="Perfil Auditado">✓</div>
+                    </div>
+                    <p class="sub-profissao" id="prof-profissao">Especialidade</p>
+                    <p class="regiao-txt" id="prof-regiao">Região</p>
+                    <span class="badge-ong-perfil" id="prof-instituicao">Validado pela Instituição</span>
+                    
+                    <div class="mini-stats">
+                        <span id="prof-nota-topo">⭐ 0.0</span>
+                        <span>•</span>
+                        <span id="prof-servicos-topo">0 serviços realizados</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="topo-direita">
+                <h3>Reputação Verificável</h3>
+                <div class="widgets-desempenho-grid">
+                    
+                    <div class="widget-card">
+                        <div class="widget-header" id="widget-comparecimento">100%</div>
+                        <p>Taxa de Comparecimento</p>
+                        <div class="barra-progresso">
+                            <div class="progresso-fill" id="fill-comparecimento" style="width: 100%"></div>
+                        </div>
+                        <span class="meta-txt">Histórico excelente</span>
+                    </div>
+
+                    <div class="widget-card">
+                        <div class="widget-header" id="widget-resposta">95%</div>
+                        <p>Taxa de Resposta no Chat</p>
+                        <div class="barra-progresso">
+                            <div class="progresso-fill" id="fill-resposta" style="width: 95%"></div>
+                        </div>
+                        <span class="meta-txt">Responde rápido</span>
+                    </div>
+
+                    <div class="widget-card">
+                        <div class="widget-header" id="widget-recorrentes">0</div>
+                        <p>Clientes Recorrentes</p>
+                        <div class="barra-progresso">
+                            <div class="progresso-fill" style="width: 60%; background-color: var(--laranja-primario);"></div>
+                        </div>
+                        <span class="meta-txt">Fidelidade alta</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="botoes-acao-linha">
+            <button class="btn-contratar-agora" onclick="abrirNegociacao()">Solicitar Orçamento (Abrir Chat)</button>
+            <button class="btn-sec-perfil" onclick="window.location.href='pesquisa.html'">Voltar para a Busca</button>
+        </div>
+
+        <div class="perfil-detalhes-grid">
+            
+            <div class="detalhe-coluna">
+                <h3>História de Vida</h3>
+                <p class="sobre-texto" id="prof-sobre">Biografia detalhada do profissional...</p>
+                
+                <div class="mini-tags-pessoais" style="margin-top: 20px;">
+                    <p><strong>Cadastrado por:</strong> Vinculado a uma instituição parceira auditada.</p>
+                    <p><strong>Inserção Produtiva:</strong> Conta monitorada para garantia de tarifas limpas.</p>
+                </div>
+            </div>
+
+            <div class="detalhe-coluna">
+                <h3>Habilidades e Selos</h3>
+                <div class="tags-habilidades" id="prof-habilidades">
+                    </div>
+                
+                <h3 style="margin-top: 30px;">Certificações</h3>
+                <ul class="lista-check">
+                    <li>✔️ Documentação Pessoal Validada (RG/CPF)</li>
+                    <li>✔️ Antecedentes Criminais Verificados</li>
+                    <li>✔️ Capacitação técnica chancelada pela ONG</li>
+                </ul>
+            </div>
+
+            <div class="detalhe-coluna">
+                <h3>Valores de Referência</h3>
+                <ul class="lista-precos">
+                    <li><strong>Taxa Inicial de Visita:</strong> R$ <span id="preco-inicial">0,00</span></li>
+                    <li><strong>Preço Estimado da Diária:</strong> R$ <span id="preco-diaria">0,00</span></li>
+                    <li><strong>Orçamento de Balcão:</strong> <span id="preco-orcamento">Sob Consulta</span></li>
+                </ul>
+                <p style="font-size: 12px; color: var(--texto-cinza); margin-top: 15px; line-height: 1.4;">
+                    * O valor exato do serviço será acertado de forma transparente diretamente no chat de negociação com o profissional.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="avaliacoes-secao">
+            <h3 id="titulo-avaliacoes">Avaliações dos Clientes (0)</h3>
+            <div class="avaliacoes-grid" id="container-reviews">
+                </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>© 2026 Eleva</p>
+            <p>Projetado e Idealizado por Carla Barroso</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_URL = 'https://cahdiel.pythonanywhere.com/api';
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const tipo = localStorage.getItem('usuarioTipo');
+            const btnNav = document.getElementById('btn-nav-global');
+            if(tipo && btnNav) {
+                btnNav.textContent = 'Meu Painel';
+                btnNav.href = `painel-${tipo}.html`;
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const profId = urlParams.get('id');
+
+            if (!profId) {
+                alert('Profissional não especificado.');
+                window.location.href = 'pesquisa.html';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/profissionais/${profId}`);
+                
+                if (response.status === 200) {
+                    const profissional = await response.json();
+                    alimentarPerfil(profissional);
+                } else {
+                    gerarPerfilSimulado(profId);
+                }
+            } catch (error) {
+                console.error("Erro ao conectar à API:", error);
+                gerarPerfilSimulado(profId); 
+            }
+        });
+
+        function alimentarPerfil(prof) {
+            document.title = `Eleva | Perfil de ${prof.nome}`;
+            document.getElementById('bread-nome').textContent = prof.nome;
+            document.getElementById('prof-nome').textContent = prof.nome;
+            document.getElementById('prof-profissao').textContent = prof.profissao;
+            document.getElementById('prof-regiao').textContent = ` ${prof.regiao}`;
+            document.getElementById('prof-instituicao').textContent = `Validado pela Instituição: ${prof.instituicao}`;
+            
+            
+            document.getElementById('prof-nota-topo').textContent = `⭐ ${prof.nota.toFixed(1)} (${prof.avaliacoes_qtd} avaliações)`;
+            document.getElementById('prof-servicos-topo').textContent = `${prof.servicos_qtd} serviços realizados`;
+            
+            document.getElementById('prof-sobre').textContent = prof.sobre_mim || "História de vida em processo de documentação institucional.";
+            
+            document.getElementById('widget-comparecimento').textContent = prof.taxa_comparecimento || "100%";
+            document.getElementById('fill-comparecimento').style.width = prof.taxa_comparecimento || "100%";
+            document.getElementById('widget-resposta').textContent = prof.taxa_resposta || "90%";
+            document.getElementById('fill-resposta').style.width = prof.taxa_resposta || "90%";
+            document.getElementById('widget-recorrentes').textContent = prof.clientes_recorrentes || "5";
+
+            document.getElementById('preco-inicial').textContent = prof.preco_inicial || "80,00";
+            document.getElementById('preco-diaria').textContent = prof.preco_diaria || "220,00";
+            document.getElementById('preco-orcamento').textContent = prof.preco_orcamento || "Combinado via Chat";
+
+            const containerFoto = document.getElementById('foto-container');
+            if (prof.foto && prof.foto !== "") {
+                containerFoto.innerHTML = `<img src="${prof.foto}" alt="Foto de ${prof.nome}">`;
+            } else {
+                const inicial = prof.nome.charAt(0);
+                containerFoto.innerHTML = `<div style="width:160px; height:160px; border-radius:50%; background:#E0F2FE; color:#0369A1; display:flex; align-items:center; justify-content:center; font-size:65px; font-weight:bold; border:4px solid #E2E8F0;">${inicial}</div>`;
+            }
+
+            const containerHabilidades = document.getElementById('prof-habilidades');
+            containerHabilidades.innerHTML = '';
+            if (prof.habilidades) {
+                prof.habilidades.split(',').forEach(hab => {
+                    containerHabilidades.innerHTML += `<span>${hab.trim()}</span>`;
+                });
+            }
+
+            document.getElementById('titulo-avaliacoes').textContent = `Avaliações dos Clientes (${prof.avaliacoes_qtd})`;
+            const containerReviews = document.getElementById('container-reviews');
+            containerReviews.innerHTML = `
+                <div class="review-box">
+                    <div class="estrelas">⭐⭐⭐⭐⭐</div>
+                    <p class="text-review">"${prof.review_recente || "Profissional extremamente educado e focado em resolver o problema."}"</p>
+                    <span class="autor-review">${prof.review_autor || "Cliente Eleva"}</span>
+                </div>
+            `;
+        }
+
+        function gerarPerfilSimulado(id) {
+            let profFake = {
+                id: id,
+                nome: id == 2 ? "Marcos Paulo" : "João Silva",
+                profissao: id == 2 ? "Encanador Residencial" : "Eletricista de Manutenção",
+                regiao: id == 2 ? "Ceilândia, Distrito Federal" : "Taguatinga e Samambaia, Distrito Federal",
+                instituicao: id == 2 ? "Associação Construir" : "Instituto Caminhos",
+                nota: id == 2 ? 4.7 : 4.9,
+                avaliacoes_qtd: id == 2 ? 18 : 42,
+                servicos_qtd: id == 2 ? 54 : 120,
+                sobre_mim: id == 2 
+                    ? "Trabalho com encanamentos hidráulicos residenciais e prediais há mais de 6 anos. Especialista em caça-vazamentos, reparos de válvulas de descarga e instalações de redes de esgoto limpas." 
+                    : "Sou eletricista qualificado e atuo na área de reparos há 10 anos. Aprendi os primeiros passos do ofício com minha família e passei por cursos de aperfeiçoamento. Meu compromisso é entregar um diagnóstico correto, transparente e sem surpresas no preço final.",
+                habilidades: id == 2 ? "Redes de Esgoto, Reparo de Infiltrações, Troca de Torneiras, Caça-Vazamentos" : "Instalação Elétrica, Manutenção de Quadros, Instalação de Chuveiros, Troca de Fiação",
+                preco_inicial: id == 2 ? "100,00" : "80,00",
+                preco_diaria: id == 2 ? "250,00" : "200,00",
+                preco_orcamento: "Definido após conferência",
+                taxa_comparecimento: "100%",
+                taxa_resposta: id == 2 ? "88%" : "98%",
+                clientes_recorrentes: id == 2 ? "4" : "12",
+                review_recente: id == 2 ? "Muito prestativo, resolveu o vazamento do banheiro rapidamente." : "Excelente profissional, chegou exatamente no horário e limpou tudo ao terminar.",
+                review_autor: id == 2 ? "Carlos E." : "Maria F."
+            };
+            alimentarPerfil(profFake);
+        }
+
+        async function abrirNegociacao() {
+            const tipo = localStorage.getItem('usuarioTipo');
+            const meuNome = localStorage.getItem('usuarioNome');
+            const profNome = document.getElementById('prof-nome').textContent;
+
+            if (!tipo || tipo !== 'cliente') {
+                alert('Apenas usuários cadastrados como Clientes podem iniciar negociações e solicitar orçamentos.');
+                window.location.href = 'entrar.html';
+                return;
+            }
+            
+            try {
+                await fetch(`${API_URL}/solicitacoes`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ profissional_nome: profNome, nome_cliente: meuNome })
+                });
+            } catch (e) { console.error("Erro ao registrar solicitação:", e); }
+
+            const salaId = `chat_${meuNome}_${profNome}`.replace(/\s+/g, '_').toLowerCase();
+            window.location.href = `chat.html?sala=${salaId}&destinatario=${profNome}`;
+        }
+    </script>
+</body>
+</html>

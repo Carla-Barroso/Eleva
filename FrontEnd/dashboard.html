@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleva | Painel da Instituição</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo-completa.png" alt="Eleva Logo"></a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Como funciona</a>
+            <a href="pesquisa.html">Profissionais</a>
+            <a href="parceiros.html">Parceiros</a>
+            <a href="entrar.html" class="btn-entrar" id="btn-nav-global">Entrar</a>
+        </nav>
+    </header>
+
+    <main class="dashboard-container section-container">
+        <div class="ong-profile-card">
+            <div class="ong-avatar-info">
+                <div class="ong-icon-placeholder">🤝</div>
+                <div class="ong-nome-dados">
+                    <h2>Instituto Caminhos</h2>
+                    <span class="badge-tipo-instituicao">Instituição Parceira</span>
+                    <p class="ong-meta">👤 Responsável: Ana Paula Martins · 📍 Taguatinga, DF</p>
+                </div>
+            </div>
+            <div class="ong-sobre-box">
+                <strong>Sobre a instituição:</strong>
+                <p>Organização da sociedade civil que atua há mais de 8 anos promovendo inclusão social e geração de renda através da qualificação e conexão de profissionais a oportunidades reais de trabalho.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-secao">
+            <h3>📈 Impacto gerado</h3>
+            <div class="metrics-grid-ong">
+                <div class="metric-card-ong">
+                    <div class="metric-icon bg-light-orange">👥</div>
+                    <div class="metric-data"><h4>128</h4><p>Profissionais cadastrados</p></div>
+                </div>
+                <div class="metric-card-ong">
+                    <div class="metric-icon bg-light-green">✔️</div>
+                    <div class="metric-data"><h4>96</h4><p>Profissionais ativos</p></div>
+                </div>
+                <div class="metric-card-ong">
+                    <div class="metric-icon bg-light-blue">💼</div>
+                    <div class="metric-data"><h4>532</h4><p>Serviços realizados</p></div>
+                </div>
+                <div class="metric-card-ong text-destaque-renda">
+                    <div class="metric-icon bg-light-purple">💰</div>
+                    <div class="metric-data"><h4>R$ 84.230</h4><p>Renda gerada</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-secao">
+            <h3>⚙️ Ações institucionais</h3>
+            <div class="acoes-grid-ong">
+                <div class="acao-row" onclick="alert('Funcionalidade simulada no MVP.')"><div class="acao-left"><span class="acao-icon">👤</span><span class="acao-label">Gerenciar profissionais</span></div><span class="seta-link">❯</span></div>
+                <div class="acao-row" onclick="alert('Funcionalidade simulada no MVP.')"><div class="acao-left"><span class="acao-icon">📄</span><span class="acao-label">Validar documentos</span></div><span class="seta-link">❯</span></div>
+                <div class="acao-row" onclick="alert('Funcionalidade simulada no MVP.')"><div class="acao-left"><span class="acao-icon">📈</span><span class="acao-label">Acompanhar desempenho</span></div><span class="seta-link">❯</span></div>
+                <div class="acao-row" onclick="alert('Funcionalidade simulada no MVP.')"><div class="acao-left"><span class="acao-icon">🤝</span><span class="acao-label">Mediação de conflitos</span></div><span class="seta-link">❯</span></div>
+                <div class="acao-row" onclick="alert('Funcionalidade simulada no MVP.')"><div class="acao-left"><span class="acao-icon">📋</span><span class="acao-label">Relatórios de impacto</span></div><span class="seta-link">❯</span></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>© 2026 Eleva</p>
+            <p>Projetado e Idealizado por Carla Barroso</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tipo = localStorage.getItem('usuarioTipo');
+            const btnNav = document.getElementById('btn-nav-global');
+            if(tipo && btnNav) {
+                btnNav.textContent = 'Meu Painel';
+                btnNav.href = `painel-${tipo}.html`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleva | Pagamento Seguro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .checkout-container { max-width: 900px; margin: 40px auto; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; }
+        .checkout-box { background: var(--branco); border: 1px solid var(--borda); border-radius: 12px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .checkout-box h2 { color: var(--azul-institucional); margin-bottom: 20px; font-size: 22px; border-bottom: 2px solid var(--borda); padding-bottom: 10px; }
+        
+        .resumo-item { display: flex; justify-content: space-between; margin-bottom: 15px; color: var(--texto-cinza); font-size: 15px; }
+        .resumo-total { display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 2px dashed var(--borda); font-size: 20px; font-weight: 700; color: var(--azul-institucional); }
+        
+        .metodo-pagamento { border: 1px solid var(--borda); border-radius: 8px; padding: 15px; margin-bottom: 15px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 15px; }
+        .metodo-pagamento:hover { border-color: var(--laranja-primario); background-color: #FFF3ED; }
+        .metodo-ativo { border-color: var(--laranja-primario); background-color: #FFF3ED; border-width: 2px; }
+        
+        .pix-area { text-align: center; display: none; padding: 20px 0; animation: fadeIn 0.3s; }
+        .pix-qrcode { width: 150px; height: 150px; background-color: #E2E8F0; margin: 0 auto 15px auto; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 40px; border: 4px solid #10B981; }
+        
+        .cartao-area { display: none; margin-top: 15px; animation: fadeIn 0.3s; }
+        
+        /* Modal de Sucesso */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(1, 32, 70, 0.8); display: none; align-items: center; justify-content: center; z-index: 2000; }
+        .modal-sucesso { background: white; padding: 40px; border-radius: 16px; text-align: center; max-width: 400px; }
+        .modal-sucesso h3 { color: #10B981; font-size: 24px; margin: 15px 0; }
+        .loader-spinner { border: 4px solid #F3F4F6; border-top: 4px solid var(--laranja-primario); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        @media (max-width: 768px) { .checkout-container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body style="background-color: var(--fundo-claro);">
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo-completa.png" alt="Eleva Logo"></a>
+        </div>
+        <nav class="nav-links">
+            <span style="font-weight: 600; color: #10B981;">Ambiente Seguro</span>
+        </nav>
+    </header>
+
+    <div class="section-container">
+        <div class="alerta-escrow" style="margin-top: 30px;">
+            <strong>Como funciona o Pagamento Seguro (Escrow)?</strong><br>
+            O seu dinheiro não vai direto para o profissional agora. Ele fica guardado numa conta segura da Eleva. O valor só é transferido para o profissional quando você confirmar que o serviço foi concluído com sucesso.
+        </div>
+
+        <div class="checkout-container">
+            <div class="checkout-box">
+                <h2>Forma de Pagamento</h2>
+                
+                <div class="metodo-pagamento metodo-ativo" id="btn-pix" onclick="selecionarMetodo('pix')">
+                    <span style="font-size: 24px;">💠</span>
+                    <div>
+                        <strong style="color: var(--azul-institucional); display: block;">PIX (Aprovação Imediata)</strong>
+                        <span style="font-size: 13px; color: var(--texto-cinza);">Gere o código e pague no seu app do banco.</span>
+                    </div>
+                </div>
+
+                <div class="metodo-pagamento" id="btn-cartao" onclick="selecionarMetodo('cartao')">
+                    <span style="font-size: 24px;">💳</span>
+                    <div>
+                        <strong style="color: var(--azul-institucional); display: block;">Cartão de Crédito</strong>
+                        <span style="font-size: 13px; color: var(--texto-cinza);">Parcele em até 3x sem juros.</span>
+                    </div>
+                </div>
+
+                <div class="pix-area" id="area-pix" style="display: block;">
+                    <div class="pix-qrcode">📱</div>
+                    <p style="font-size: 14px; font-weight: bold; color: var(--azul-institucional);">Escaneie o QR Code</p>
+                    <p style="font-size: 13px; color: var(--texto-cinza); margin-bottom: 20px;">Ou copie o código Pix Copia e Cola abaixo:</p>
+                    <input type="text" value="00020126580014br.gov.bcb.pix0136eleva-pagamento-seguro..." readonly style="width: 100%; padding: 10px; background: #F8FAFC; border: 1px dashed #CBD5E1; text-align: center; color: #94A3B8; margin-bottom: 15px;">
+                    <button class="btn-enviar-solicitacao" onclick="simularPagamento()">Já realizei o pagamento</button>
+                </div>
+
+                <div class="cartao-area" id="area-cartao">
+                    <div class="form-group"><label>Número do Cartão</label><input type="text" placeholder="0000 0000 0000 0000"></div>
+                    <div style="display: flex; gap: 15px;">
+                        <div class="form-group" style="flex: 1;"><label>Validade</label><input type="text" placeholder="MM/AA"></div>
+                        <div class="form-group" style="flex: 1;"><label>CVV</label><input type="text" placeholder="123"></div>
+                    </div>
+                    <div class="form-group"><label>Nome no Cartão</label><input type="text" placeholder="Nome impresso"></div>
+                    <button class="btn-enviar-solicitacao" onclick="simularPagamento()">Confirmar Pagamento</button>
+                </div>
+            </div>
+
+            <div class="checkout-box" style="height: fit-content;">
+                <h2>Resumo do Serviço</h2>
+                
+                <div class="resumo-item">
+                    <span>Profissional:</span>
+                    <strong id="chk-prof">Carregando...</strong>
+                </div>
+                
+                <div class="resumo-item">
+                    <span>Valor do Serviço (Repasse 100%):</span>
+                    <strong id="chk-base">R$ 0,00</strong>
+                </div>
+
+                <div class="resumo-item" style="color: var(--laranja-primario);">
+                    <span>Taxa Institucional ONG (10%):</span>
+                    <strong id="chk-taxa">R$ 0,00</strong>
+                </div>
+
+                <div class="resumo-item" style="color: #10B981; font-weight: 600;">
+                    <span>Proteção Escrow:</span>
+                    <span>Inclusa ✔️</span>
+                </div>
+
+                <div class="resumo-total">
+                    <span>Total a Pagar:</span>
+                    <span id="chk-total">R$ 0,00</span>
+                </div>
+                
+                <!-- Seção: Agendamento do Serviço (Sem Endereço) -->
+                <div style="margin-top: 30px; border-top: 2px dashed var(--borda); padding-top: 20px;">
+                    <h3 style="color: var(--azul-institucional); font-size: 18px; margin-bottom: 15px;">Agendamento do Serviço</h3>
+                    <p style="font-size: 13px; color: var(--texto-cinza); margin-bottom: 15px;">Insira a data e o horário combinados no chat para formalizar a ordem de serviço.</p>
+                    
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label style="font-weight: 600; font-size: 14px; color: var(--azul-institucional);">Data e Horário Combinados</label>
+                        <input type="datetime-local" id="data-servico" style="width: 100%; padding: 10px; border: 1px solid var(--borda); border-radius: 6px; margin-top: 5px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-processando">
+        <div class="modal-sucesso">
+            <div class="loader-spinner" id="spinner"></div>
+            <div id="sucesso-icon" style="display: none; font-size: 60px;">✅</div>
+            <h3 id="modal-title">Processando Pagamento...</h3>
+            <p id="modal-text" style="color: var(--texto-cinza);">Aguardando confirmação do banco.</p>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://cahdiel.pythonanywhere.com/api';
+        
+        // Dados vindos do Chat
+        const urlParams = new URLSearchParams(window.location.search);
+        let valorString = urlParams.get('valor') || '0,00'; 
+        let profissional = urlParams.get('prof') || 'Profissional Eleva';
+        let meuNome = localStorage.getItem('usuarioNome');
+
+        // Matemática Limpa para os 10%
+        let valorBase = parseFloat(valorString.replace(/\./g, '').replace(',', '.'));
+        if (isNaN(valorBase)) valorBase = 0;
+        
+        let taxaOng = valorBase * 0.10;
+        let valorTotal = valorBase + taxaOng;
+
+        // Formata os números de volta para reais
+        const formataMoeda = (num) => num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!meuNome) { window.location.href = 'entrar.html'; return; }
+            
+            // Preenche a tela visualmente com a separação dos valores
+            document.getElementById('chk-prof').textContent = profissional;
+            document.getElementById('chk-base').textContent = `R$ ${formataMoeda(valorBase)}`;
+            document.getElementById('chk-taxa').textContent = `R$ ${formataMoeda(taxaOng)}`;
+            document.getElementById('chk-total').textContent = `R$ ${formataMoeda(valorTotal)}`;
+        });
+
+        function selecionarMetodo(metodo) {
+            document.getElementById('btn-pix').classList.remove('metodo-ativo');
+            document.getElementById('btn-cartao').classList.remove('metodo-ativo');
+            document.getElementById('area-pix').style.display = 'none';
+            document.getElementById('area-cartao').style.display = 'none';
+
+            document.getElementById(`btn-${metodo}`).classList.add('metodo-ativo');
+            document.getElementById(`area-${metodo}`).style.display = 'block';
+        }
+
+        async function simularPagamento() {
+            // Validação do novo campo antes de prosseguir
+            const dataServico = document.getElementById('data-servico').value;
+            
+            if (!dataServico) {
+                alert("Por favor, preencha a data e o horário do serviço para formalizar o agendamento.");
+                return;
+            }
+
+            // Formata a data para um formato mais legível
+            const dataFormatada = new Date(dataServico).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+
+            document.getElementById('modal-processando').style.display = 'flex';
+
+            setTimeout(async () => {
+                try {
+                    // ATENÇÃO: Enviamos os dados do agendamento junto com o pagamento
+                    await fetch(`${API_URL}/pagar`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            valor: formataMoeda(valorBase), 
+                            profissional_nome: profissional,
+                            nome_cliente: meuNome,
+                            data_servico: dataFormatada
+                        })
+                    });
+
+                    document.getElementById('spinner').style.display = 'none';
+                    document.getElementById('sucesso-icon').style.display = 'block';
+                    document.getElementById('modal-title').textContent = 'Pagamento Aprovado!';
+                    document.getElementById('modal-text').innerHTML = `O total de <strong>R$ ${formataMoeda(valorTotal)}</strong> foi processado.<br>O repasse do profissional está no Escrow.<br>Redirecionando para o seu painel...`;
+                    
+                    setTimeout(() => {
+                        window.location.href = 'painel-cliente.html';
+                    }, 3000);
+
+                } catch (e) {
+                    alert("Erro de conexão ao processar o pagamento.");
+                    document.getElementById('modal-processando').style.display = 'none';
+                }
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
