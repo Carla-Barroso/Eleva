@@ -2,7 +2,7 @@
 
 Plataforma digital que conecta pessoas em situação de vulnerabilidade social a oportunidades de trabalho autônomo no Distrito Federal, com validação institucional, rastreabilidade e sistema de pagamento em escrow.
 
-🔗 **[Ver projeto no ar](https://elevaprofissinais.vercel.app)**
+🔗 **[Ver projeto no ar](https://elevaprofissionais.vercel.app/)**
 
 ---
 
